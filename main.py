@@ -25,6 +25,9 @@ click_SFX.set_volume(sound_effect_volume)
 def get_main_menu_font(size):
     return pygame.font.Font("/Users/evaldsberzins/pygame/RayRhythm/fonts/Blastge DEMO VERSION.ttf", size)
 
+def get_level_name_font(size):
+    return pygame.font.Font("/Users/evaldsberzins/pygame/RayRhythm/fonts/capitolcity.ttf", size)
+
 def play():
     while True:
         pygame.mixer_music.stop()
@@ -38,7 +41,7 @@ def play():
         screen.blit(PLAY_TEXT, PLAY_RECT)
 
         LEVEL_1 = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/level-1.png"), pos=(840, 500),
-                             text_input="Identity Part 4", font=get_main_menu_font(50), base_color="White", hovering_color="#B1D2EC")
+                             text_input="Identity Part 4", font=get_level_name_font(50), base_color="White", hovering_color="#B1D2EC")
         LEVEL_1.changeColor(LEVEL_1_MOUSE_POS)
         LEVEL_1.update(screen)
 
