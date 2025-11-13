@@ -3,7 +3,7 @@ import pygame_widgets
 from pygame_widgets.slider import Slider
 from pygame_widgets.textbox import TextBox
 from button import Button
-from Charts import IdentityPart4
+from Charts import IdentityPart4, TestLevel
 
 pygame.init()
 
@@ -37,15 +37,20 @@ def play():
         screen.blit(LevelSelectBG, (0, 0))
 
         PLAY_TEXT = get_main_menu_font(45).render("This is the PLAY screen.", True, "White")
-        PLAY_RECT = PLAY_TEXT.get_rect(center=(840, 280))
+        PLAY_RECT = PLAY_TEXT.get_rect(center=(840, 100))
         screen.blit(PLAY_TEXT, PLAY_RECT)
 
-        LEVEL_1 = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/level-1.png"), pos=(840, 500),
-                             text_input="Identity Part 4", font=get_level_name_font(50), base_color="White", hovering_color="#B1D2EC")
+        LEVEL_1 = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/level-1.png"), pos=(840, 300),
+                             text_input="Identity Part 4", font=get_level_name_font(50), base_color="White", hovering_color="#C2F1FF")
         LEVEL_1.changeColor(LEVEL_1_MOUSE_POS)
         LEVEL_1.update(screen)
 
-        PLAY_BACK = Button(image=None, pos=(840, 800), text_input="BACK", font=get_main_menu_font(75), base_color="White", hovering_color="White")
+        TEST_LEVEL = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/test-level.png"), pos=(840, 550),
+                             text_input="TEST LEVEL", font=get_level_name_font(50), base_color="White", hovering_color="#FFFBDA")
+        TEST_LEVEL.changeColor(LEVEL_1_MOUSE_POS)
+        TEST_LEVEL.update(screen)
+
+        PLAY_BACK = Button(image=None, pos=(840, 900), text_input="BACK", font=get_main_menu_font(75), base_color="White", hovering_color="White")
 
         PLAY_BACK.changeColor(PLAY_MOUSE_POS)
         PLAY_BACK.update(screen)
@@ -60,6 +65,8 @@ def play():
                     main_menu()
                 if LEVEL_1.checkForInput(PLAY_MOUSE_POS):
                     IdentityPart4.start_identity_part4(screen)
+                if TEST_LEVEL.checkForInput(PLAY_MOUSE_POS):
+                    TestLevel.start_test_level(screen)
         
         pygame.display.update()
 
