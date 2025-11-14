@@ -96,8 +96,6 @@ def options():
 
         pygame.display.update()
 
-
-
 def main_menu():
     pygame.mixer_music.play()
     while True:
