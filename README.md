@@ -18,6 +18,20 @@ Made with PyGame library: https://www.pygame.org/
 
 <img width="1671" height="1046" alt="image" src="https://github.com/user-attachments/assets/675e6b28-d6fd-4a76-8075-2cc0950999e3" />
 
+## Files
+
+    .
+    ├── main.py - The main file to run the program if not from an .exe
+    ├── button.py - Button class that handles how buttons function for menus
+    ├── Graphics - folder with the games assets minus level backgrounds
+    ├── fonts - folder with the fonts used in the game
+    ├── sounds - folder with the main menu songs and sound effect
+    ├── Charts - fodler with the levels
+    │   ├── anamone - folder that includes a python file that has the function to play the level plus the levels background and song
+    │   ├── TestLevel - folder with a test level, its background and song
+    ├── Graphics - folder with visual elements for the GUI
+    ├── requirements.txt - required libraries
+    ├── credits - media credits, both visual and audial
 
 ## WIP
 
