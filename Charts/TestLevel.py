@@ -8,18 +8,33 @@ clock = pygame.time.Clock()
 
 TestBackground = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/test-level-background.png")
 GameplayOverlay = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/gameplay-field.png")
+
+# Circle skin assets
 PressedCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_pressed.png")
 RegularCirlce = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
 FallingNote = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
+
+
+# Rayman skin assets
+PressedRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/pressed-rayman-circle.png")
+RegularRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
+FallingRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
+
+# Sound effects
+HitSound = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/hit-sound.wav")
+ComboBreak = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/combo-break.wav")
 
 chart_lanes = [890, 1070, 1250, 1430]
 player_keys = [pygame.K_d, pygame.K_f, pygame.K_j, pygame.K_k]
 note_speed = 20
 target_y_coordinate = 880
 score = 0
+combo = 0
 
 music_offset_ms = 2000
 spawn_lead_ms = 0
+
+skin_variant = 0
 
 chart = [
     {"time": 900, "lane": 0}, #1
@@ -65,17 +80,22 @@ chart = [
 def start_test_level(screen):
     global score
     score = 0
+    global combo
+    combo = 0
+    global skin_variant
+    skin_variant = 1
     running = True
     chart_index = 0
     notes = []
 
     pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/test-level.wav")
     pygame.mixer.music.set_volume(0.2)
+    HitSound.set_volume(0.1)
+    ComboBreak.set_volume(0.1)
     
     music_started = False
     music_start_time = None
     level_start_time = pygame.time.get_ticks()
-    # pygame.mixer_music.play()
 
     while running:
         dt = clock.tick(60)
@@ -114,14 +134,30 @@ def start_test_level(screen):
                         if closest_note:
                             if closest_dist <= 50:
                                 score += 100
+                                combo += 1
                                 closest_note["hit"] = True
                             elif closest_dist <= 100:
                                 score += 50
+                                combo += 1
                                 closest_note["hit"] = True
                             elif closest_dist <= 200:
                                 score += 25
+                                combo += 1
                                 closest_note["hit"] = True
-        
+                            elif closest_dist <= 400:
+                                if combo >= 3:
+                                    ComboBreak.play()
+                                combo = 0
+                                closest_note["hit"] = True
+
+                if event.key == pygame.K_d:
+                        HitSound.play()
+                if event.key == pygame.K_f:
+                        HitSound.play()
+                if event.key == pygame.K_j:
+                        HitSound.play()
+                if event.key == pygame.K_k:
+                        HitSound.play()
         for n in notes:
             n["y"] += note_speed
 
@@ -129,25 +165,43 @@ def start_test_level(screen):
 
         screen.blit(TestBackground, (0, 0))
         screen.blit(GameplayOverlay, (0, 0)) 
-        screen.blit(RegularCirlce, (890, 880))
-        screen.blit(RegularCirlce, (1070, 880))
-        screen.blit(RegularCirlce, (1250, 880))
-        screen.blit(RegularCirlce, (1430, 880))
 
-        for x in chart_lanes:
-            screen.blit(RegularCirlce, (x, target_y_coordinate))
-        for n in notes:
-            x = chart_lanes[n["lane"]]
-            screen.blit(FallingNote, (x, n["y"]))
+        if skin_variant == 0:
+            screen.blit(RegularCirlce, (890, 880))
+            screen.blit(RegularCirlce, (1070, 880))
+            screen.blit(RegularCirlce, (1250, 880))
+            screen.blit(RegularCirlce, (1430, 880))
+            for x in chart_lanes:
+                screen.blit(RegularCirlce, (x, target_y_coordinate))
+            for n in notes:
+                x = chart_lanes[n["lane"]]
+                screen.blit(FallingNote, (x, n["y"]))
+            keys = pygame.key.get_pressed()
+            for lane, key in enumerate(player_keys):
+                if keys[key]:
+                    screen.blit(PressedCircle, (chart_lanes[lane], target_y_coordinate))
 
-        keys = pygame.key.get_pressed()
-        for lane, key in enumerate(player_keys):
-            if keys[key]:
-                screen.blit(PressedCircle, (chart_lanes[lane], target_y_coordinate))
+        if skin_variant == 1:
+            screen.blit(RegularRaymanCircle, (890, 880))
+            screen.blit(RegularRaymanCircle, (1070, 880))
+            screen.blit(RegularRaymanCircle, (1250, 880))
+            screen.blit(RegularRaymanCircle, (1430, 880))
+            for x in chart_lanes:
+                screen.blit(RegularRaymanCircle, (x, target_y_coordinate))
+            for n in notes:
+                x = chart_lanes[n["lane"]]
+                screen.blit(FallingRaymanCircle, (x, n["y"]))
+            keys = pygame.key.get_pressed()
+            for lane, key in enumerate(player_keys):
+                if keys[key]:
+                    screen.blit(PressedRaymanCircle, (chart_lanes[lane], target_y_coordinate))
 
         font = pygame.font.Font(None, 60)
         score_text = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_text, (100, 100))
+
+        combo_text = font.render(f"Combo: {combo}", True, (255, 255, 255))
+        screen.blit(combo_text, (100, 150))
 
         pygame.display.flip()
 
