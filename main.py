@@ -39,16 +39,17 @@ def play():
         PLAY_TEXT = get_main_menu_font(45).render("This is the PLAY screen.", True, "White")
         PLAY_RECT = PLAY_TEXT.get_rect(center=(840, 100))
         screen.blit(PLAY_TEXT, PLAY_RECT)
+        
+        TEST_LEVEL = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/test-level.png"), pos=(840, 300),
+                             text_input="TEST LEVEL", font=get_level_name_font(50), base_color="White", hovering_color="#FFFBDA")
+        TEST_LEVEL.changeColor(LEVEL_1_MOUSE_POS)
+        TEST_LEVEL.update(screen)
 
-        LEVEL_1 = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/level-1.png"), pos=(840, 300),
+        LEVEL_1 = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/level-1.png"), pos=(840, 550),
                              text_input="Identity Part 4", font=get_level_name_font(50), base_color="White", hovering_color="#C2F1FF")
         LEVEL_1.changeColor(LEVEL_1_MOUSE_POS)
         LEVEL_1.update(screen)
 
-        TEST_LEVEL = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/test-level.png"), pos=(840, 550),
-                             text_input="TEST LEVEL", font=get_level_name_font(50), base_color="White", hovering_color="#FFFBDA")
-        TEST_LEVEL.changeColor(LEVEL_1_MOUSE_POS)
-        TEST_LEVEL.update(screen)
 
         PLAY_BACK = Button(image=None, pos=(840, 900), text_input="BACK", font=get_main_menu_font(75), base_color="White", hovering_color="White")
 
