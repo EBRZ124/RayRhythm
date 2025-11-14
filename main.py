@@ -18,8 +18,8 @@ LevelSelectBG = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphic
 music_volume = 0.5
 sound_effect_volume = 0.5
 
-Menu_Song = pygame.mixer_music.load("/Users/evaldsberzins/pygame/RayRhythm/sounds/main_menu_music.mp3")
-Menu_Song = pygame.mixer_music.set_volume(music_volume)
+pygame.mixer_music.load("/Users/evaldsberzins/pygame/RayRhythm/sounds/main_menu_music.mp3")
+pygame.mixer_music.set_volume(music_volume)
 click_SFX = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/sounds/click-sound.wav")
 click_SFX.set_volume(sound_effect_volume)
 
@@ -99,6 +99,8 @@ def options():
         pygame.display.update()
 
 def main_menu():
+    pygame.mixer_music.load("/Users/evaldsberzins/pygame/RayRhythm/sounds/main_menu_music.mp3")
+    pygame.mixer_music.set_volume(music_volume)
     pygame.mixer_music.play()
     while True:
         screen.blit(BackGround1, (0, 0))

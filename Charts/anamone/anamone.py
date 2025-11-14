@@ -433,15 +433,15 @@ def start_identity_part4(screen):
     global combo
     combo = 0
     global skin_variant
-    skin_variant = 0
+    skin_variant = 1
     running = True
     chart_index = 0
     notes = []
 
     pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/anamone/anamone-chart.wav")
-    pygame.mixer.music.set_volume(0.2)
-    HitSound.set_volume(0.1)
-    ComboBreak.set_volume(0.1)
+    pygame.mixer.music.set_volume(0.05)
+    HitSound.set_volume(0.2)
+    ComboBreak.set_volume(0.2)
     
     music_started = False
     music_start_time = None
@@ -511,9 +511,17 @@ def start_identity_part4(screen):
                 if event.key == pygame.K_j:
                         HitSound.play()
                 if event.key == pygame.K_k:
-                        HitSound.play()        
+                        HitSound.play()    
+
         for n in notes:
             n["y"] += note_speed
+
+        for n in notes:
+            if not n["hit"] and n["y"] > target_y_coordinate + 100:
+                if combo >= 3:
+                    ComboBreak.play()
+                combo = 0
+                n["hit"] = True
 
         notes = [n for n in notes if n["y"] < 1050 and not n["hit"]]
 

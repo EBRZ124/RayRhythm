@@ -174,6 +174,14 @@ def start_test_level(screen):
         for n in notes:
             n["y"] += note_speed
 
+        # If notes fall past the pressing area by 50px, it also counts as a miss
+        for n in notes:
+            if not n["hit"] and n["y"] > target_y_coordinate + 50:
+                if combo >= 3:
+                    ComboBreak.play()
+                combo = 0
+                n["hit"] = True
+
         notes = [n for n in notes if n["y"] < 1050 and not n["hit"]]
 
         screen.blit(TestBackground, (0, 0))
