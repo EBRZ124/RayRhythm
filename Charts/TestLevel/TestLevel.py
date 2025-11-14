@@ -6,7 +6,7 @@ pygame.init()
 pygame.mixer.init()
 clock = pygame.time.Clock()
 
-TestBackground = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/test-level-background.png")
+TestBackground = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/TestLevel/test-level-background.png")
 GameplayOverlay = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/gameplay-field.png")
 
 # Circle skin assets
@@ -96,7 +96,7 @@ def start_test_level(screen):
     chart_index = 0
     notes = []
 
-    pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/test-level.wav")
+    pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/TestLevel/test-level.wav")
     pygame.mixer.music.set_volume(0.2)
     HitSound.set_volume(0.1)
     ComboBreak.set_volume(0.1)

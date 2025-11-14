@@ -2,8 +2,9 @@ import pygame, sys
 import pygame_widgets
 from pygame_widgets.slider import Slider
 from pygame_widgets.textbox import TextBox
+from Charts.anamone import anamone
 from button import Button
-from Charts import IdentityPart4, TestLevel
+from Charts.TestLevel import TestLevel
 
 pygame.init()
 
@@ -46,7 +47,7 @@ def play():
         TEST_LEVEL.update(screen)
 
         LEVEL_1 = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/level-1.png"), pos=(840, 550),
-                             text_input="Identity Part 4", font=get_level_name_font(50), base_color="White", hovering_color="#C2F1FF")
+                             text_input="ANAMONE", font=get_level_name_font(50), base_color="White", hovering_color="#C2F1FF")
         LEVEL_1.changeColor(LEVEL_1_MOUSE_POS)
         LEVEL_1.update(screen)
 
@@ -65,7 +66,7 @@ def play():
                     click_SFX.play()
                     main_menu()
                 if LEVEL_1.checkForInput(PLAY_MOUSE_POS):
-                    IdentityPart4.start_identity_part4(screen)
+                    anamone.start_identity_part4(screen)
                 if TEST_LEVEL.checkForInput(PLAY_MOUSE_POS):
                     TestLevel.start_test_level(screen)
         
