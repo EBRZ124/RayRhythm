@@ -14,6 +14,12 @@ PressedCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphic
 RegularCirlce = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
 FallingNote = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
 
+# Result screen
+ResultScreen = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/result-screen.png")
+
+# Fonts
+def result_screen_font(size):
+    return pygame.font.Font("/Users/evaldsberzins/pygame/RayRhythm/fonts/capitolcity.ttf", size)
 
 # Rayman skin assets
 PressedRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/pressed-rayman-circle.png")
@@ -23,6 +29,8 @@ FallingRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/g
 # Sound effects
 HitSound = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/hit-sound.wav")
 ComboBreak = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/combo-break.wav")
+click_SFX = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/sounds/click-sound.wav")
+click_SFX.set_volume(0.6)
 
 chart_lanes = [890, 1070, 1250, 1430]
 player_keys = [pygame.K_d, pygame.K_f, pygame.K_j, pygame.K_k]
@@ -34,7 +42,7 @@ combo = 0
 music_offset_ms = 2000
 spawn_lead_ms = 0
 
-skin_variant = 0
+skin_variant = 1
 
 chart = [
     {"time": 900, "lane": 0}, #1
@@ -118,6 +126,10 @@ def start_test_level(screen):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if EXIT_BUTTON.checkForInput(PLAY_MOUSE_POS):
+                    click_SFX.play()
+                    running = False
 
             if event.type == pygame.KEYDOWN:
                 for lane, key in enumerate(player_keys):
@@ -158,6 +170,7 @@ def start_test_level(screen):
                         HitSound.play()
                 if event.key == pygame.K_k:
                         HitSound.play()
+
         for n in notes:
             n["y"] += note_speed
 
@@ -202,6 +215,33 @@ def start_test_level(screen):
 
         combo_text = font.render(f"Combo: {combo}", True, (255, 255, 255))
         screen.blit(combo_text, (100, 150))
+
+        # ----------------LEVEL FINISHED----------------
+        PLAY_MOUSE_POS = pygame.mouse.get_pos()
+
+        level_done = (
+            chart_index >= len(chart) and
+            len(notes) == 0 and
+            music_started and
+            not pygame.mixer.music.get_busy()
+        )
+
+        if level_done:
+            pygame.time.wait(500)
+            screen.blit(ResultScreen, (0, 0))
+            pygame.display.flip()
+
+            Final_Score_Text = result_screen_font(45).render(f"Total score: {score}", True, "White")
+            Final_Score_Rect = Final_Score_Text.get_rect(center=(840, 450))
+            screen.blit(Final_Score_Text, Final_Score_Rect)
+
+            Max_Combo = result_screen_font(45).render(f"Your max combo: {combo}", True, "White")
+            Max_Combo_Rect = Max_Combo.get_rect(center=(840, 550))
+            screen.blit(Max_Combo, Max_Combo_Rect)
+
+            EXIT_BUTTON = Button(image=None, pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="White")
+            EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
+            EXIT_BUTTON.update(screen)
 
         pygame.display.flip()
 
