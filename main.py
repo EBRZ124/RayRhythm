@@ -11,23 +11,23 @@ pygame.init()
 screen = pygame.display.set_mode((1680, 1050))
 pygame.display.set_caption("Menu")
 
-BackGround1 = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/background2.jpg")
-LevelSelectBG = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/level-select-background.png")
+BackGround1 = pygame.image.load("graphics/background2.jpg")
+LevelSelectBG = pygame.image.load("graphics/level-select-background.png")
 
 # Sound generator
 music_volume = 0.5
 sound_effect_volume = 0.5
 
-pygame.mixer_music.load("/Users/evaldsberzins/pygame/RayRhythm/sounds/main_menu_music.mp3")
+pygame.mixer_music.load("sounds/main_menu_music.mp3")
 pygame.mixer_music.set_volume(music_volume)
-click_SFX = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/sounds/click-sound.wav")
+click_SFX = pygame.mixer.Sound("sounds/click-sound.wav")
 click_SFX.set_volume(sound_effect_volume)
 
 def get_main_menu_font(size):
-    return pygame.font.Font("/Users/evaldsberzins/pygame/RayRhythm/fonts/Blastge DEMO VERSION.ttf", size)
+    return pygame.font.Font("fonts/Blastge DEMO VERSION.ttf", size)
 
 def get_level_name_font(size):
-    return pygame.font.Font("/Users/evaldsberzins/pygame/RayRhythm/fonts/capitolcity.ttf", size)
+    return pygame.font.Font("fonts/capitolcity.ttf", size)
 
 def play():
     while True:
@@ -41,12 +41,12 @@ def play():
         PLAY_RECT = PLAY_TEXT.get_rect(center=(840, 100))
         screen.blit(PLAY_TEXT, PLAY_RECT)
         
-        TEST_LEVEL = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/test-level.png"), pos=(840, 300),
+        TEST_LEVEL = Button(image=pygame.image.load("graphics/test-level.png"), pos=(840, 300),
                              text_input="TEST LEVEL", font=get_level_name_font(50), base_color="White", hovering_color="#FFFBDA")
         TEST_LEVEL.changeColor(LEVEL_1_MOUSE_POS)
         TEST_LEVEL.update(screen)
 
-        LEVEL_1 = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/level-1.png"), pos=(840, 550),
+        LEVEL_1 = Button(image=pygame.image.load("graphics/level-1.png"), pos=(840, 550),
                              text_input="ANAMONE", font=get_level_name_font(50), base_color="White", hovering_color="#C2F1FF")
         LEVEL_1.changeColor(LEVEL_1_MOUSE_POS)
         LEVEL_1.update(screen)
@@ -99,7 +99,7 @@ def options():
         pygame.display.update()
 
 def main_menu():
-    pygame.mixer_music.load("/Users/evaldsberzins/pygame/RayRhythm/sounds/main_menu_music.mp3")
+    pygame.mixer_music.load("sounds/main_menu_music.mp3")
     pygame.mixer_music.set_volume(music_volume)
     pygame.mixer_music.play()
     while True:
@@ -109,16 +109,16 @@ def main_menu():
 
         MENU_TEXT = get_main_menu_font(100).render("RayRhythm", True, "White")
         MENU_RECT = MENU_TEXT.get_rect(center=(840, 200))
-        TEXT_BG = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/Title-Rect.png").convert_alpha()
+        TEXT_BG = pygame.image.load("graphics/Title-Rect.png").convert_alpha()
         TEXT_BG = pygame.transform.scale(TEXT_BG, (MENU_RECT.width + 200, MENU_RECT.height + 100))
         BG_RECT = TEXT_BG.get_rect(center=MENU_RECT.center)
         BG_RECT.y -= 10
 
-        PLAY_BUTTON = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/Play-Rect.png"), pos=(840, 400),
+        PLAY_BUTTON = Button(image=pygame.image.load("graphics/Play-Rect.png"), pos=(840, 400),
                              text_input="PLAY", font=get_main_menu_font(75), base_color="#E57B1E", hovering_color="White")
-        OPTIONS_BUTTON = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/Options-Rect.png"), pos=(840, 550),
+        OPTIONS_BUTTON = Button(image=pygame.image.load("graphics/Options-Rect.png"), pos=(840, 550),
                              text_input="OPTIONS", font=get_main_menu_font(75), base_color="#E57B1E", hovering_color="White")
-        QUIT_BUTTON = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/Quit-Rect.png"), pos=(840, 700),
+        QUIT_BUTTON = Button(image=pygame.image.load("graphics/Quit-Rect.png"), pos=(840, 700),
                              text_input="QUIT", font=get_main_menu_font(75), base_color="#E57B1E", hovering_color="White")
         
         screen.blit(TEXT_BG, BG_RECT)
