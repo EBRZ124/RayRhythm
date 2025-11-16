@@ -7,30 +7,30 @@ pygame.init()
 pygame.mixer.init()
 clock = pygame.time.Clock()
 
-AnamoneBG = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/anamone/IdentityBG.png")
-GameplayOverlay = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/gameplay-field.png")
+AnamoneBG = pygame.image.load("/Charts/anamone/IdentityBG.png")
+GameplayOverlay = pygame.image.load("/graphics/gameplay-field.png")
 
 # Circle skin assets
-PressedCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_pressed.png")
-RegularCirlce = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
-FallingNote = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
+PressedCircle = pygame.image.load("/graphics/circle_pressed.png")
+RegularCirlce = pygame.image.load("/graphics/circle_regular.png")
+FallingNote = pygame.image.load("/graphics/circle_regular.png")
 
 # Result screen
-ResultScreen = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/result-screen.png")
+ResultScreen = pygame.image.load("/graphics/result-screen.png")
 
 # Fonts
 def result_screen_font(size):
-    return pygame.font.Font("/Users/evaldsberzins/pygame/RayRhythm/fonts/capitolcity.ttf", size)
+    return pygame.font.Font("/fonts/capitolcity.ttf", size)
 
 # Rayman skin assets
-PressedRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/pressed-rayman-circle.png")
-RegularRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
-FallingRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
+PressedRaymanCircle = pygame.image.load("/graphics/pressed-rayman-circle.png")
+RegularRaymanCircle = pygame.image.load("/graphics/regular-rayman-circle.png")
+FallingRaymanCircle = pygame.image.load("/graphics/regular-rayman-circle.png")
 
 # Sound effects
-HitSound = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/hit-sound.wav")
-ComboBreak = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/combo-break.wav")
-click_SFX = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/sounds/click-sound.wav")
+HitSound = pygame.mixer.Sound("/Charts/hit-sound.wav")
+ComboBreak = pygame.mixer.Sound("/Charts/combo-break.wav")
+click_SFX = pygame.mixer.Sound("/sounds/click-sound.wav")
 click_SFX.set_volume(0.6)
 
 chart_lanes = [890, 1070, 1250, 1430]
@@ -56,7 +56,7 @@ def start_identity_part4(screen):
     chart_index = 0
     notes = []
 
-    pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/anamone/anamone-chart.wav")
+    pygame.mixer.music.load("/Charts/anamone/anamone-chart.wav")
     pygame.mixer.music.set_volume(0.05)
     HitSound.set_volume(0.2)
     ComboBreak.set_volume(0.2)

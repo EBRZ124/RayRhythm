@@ -1,35 +1,36 @@
 import pygame, sys, random
 from button import Button
 import time
+from Charts.TestLevel import TestLevel_chart
 
 pygame.init()
 pygame.mixer.init()
 clock = pygame.time.Clock()
 
-TestBackground = pygame.image.load("Charts/TestLevel/test-level-background.png")
-GameplayOverlay = pygame.image.load("graphics/gameplay-field.png")
+TestBackground = pygame.image.load("/Charts/TestLevel/test-level-background.png")
+GameplayOverlay = pygame.image.load("/graphics/gameplay-field.png")
 
 # Circle skin assets
-PressedCircle = pygame.image.load("graphics/circle_pressed.png")
-RegularCirlce = pygame.image.load("graphics/circle_regular.png")
-FallingNote = pygame.image.load("graphics/circle_regular.png")
+PressedCircle = pygame.image.load("/graphics/circle_pressed.png")
+RegularCirlce = pygame.image.load("/graphics/circle_regular.png")
+FallingNote = pygame.image.load("/graphics/circle_regular.png")
 
 # Result screen
-ResultScreen = pygame.image.load("graphics/result-screen.png")
+ResultScreen = pygame.image.load("/graphics/result-screen.png")
 
 # Fonts
 def result_screen_font(size):
-    return pygame.font.Font("fonts/capitolcity.ttf", size)
+    return pygame.font.Font("/fonts/capitolcity.ttf", size)
 
 # Rayman skin assets
-PressedRaymanCircle = pygame.image.load("graphics/pressed-rayman-circle.png")
-RegularRaymanCircle = pygame.image.load("graphics/regular-rayman-circle.png")
-FallingRaymanCircle = pygame.image.load("graphics/regular-rayman-circle.png")
+PressedRaymanCircle = pygame.image.load("/graphics/pressed-rayman-circle.png")
+RegularRaymanCircle = pygame.image.load("/graphics/regular-rayman-circle.png")
+FallingRaymanCircle = pygame.image.load("/graphics/regular-rayman-circle.png")
 
 # Sound effects
-HitSound = pygame.mixer.Sound("Charts/hit-sound.wav")
-ComboBreak = pygame.mixer.Sound("Charts/combo-break.wav")
-click_SFX = pygame.mixer.Sound("sounds/click-sound.wav")
+HitSound = pygame.mixer.Sound("/Charts/hit-sound.wav")
+ComboBreak = pygame.mixer.Sound("/Charts/combo-break.wav")
+click_SFX = pygame.mixer.Sound("/sounds/click-sound.wav")
 click_SFX.set_volume(0.6)
 
 chart_lanes = [890, 1070, 1250, 1430]
@@ -44,46 +45,7 @@ spawn_lead_ms = 0
 
 skin_variant = 1
 
-chart = [
-    {"time": 900, "lane": 0}, #1
-    {"time": 1328, "lane": 1}, #2
-    {"time": 1756, "lane": 2}, #3
-    {"time": 2148, "lane": 3}, #4
-    {"time": 2148, "lane": 2}, #4
-    {"time": 2576, "lane": 2}, #5
-    {"time": 3004, "lane": 3}, #6
-    {"time": 3004, "lane": 2}, #6
-    {"time": 3432, "lane": 2}, #7
-    {"time": 3860, "lane": 3}, #8
-    {"time": 3860, "lane": 2}, #8
-    {"time": 4288, "lane": 0}, #9
-    {"time": 4716, "lane": 2}, #10
-    {"time": 5144, "lane": 1}, #11
-    {"time": 5527, "lane": 2}, #12
-    {"time": 6000, "lane": 2}, #13
-    {"time": 6428, "lane": 1}, #14
-    {"time": 6856, "lane": 3}, #15
-    {"time": 7284, "lane": 1}, #16
-    {"time": 7712, "lane": 3}, #17
-    {"time": 8140, "lane": 2}, #18
-    {"time": 8568, "lane": 1}, #19
-    {"time": 8996, "lane": 0}, #20
-    {"time": 9424, "lane": 0}, #21
-    {"time": 9852, "lane": 1}, #22
-    {"time": 10280, "lane": 0}, #23
-    {"time": 10708, "lane": 0}, #24
-    {"time": 11136, "lane": 2}, #25
-    {"time": 11564, "lane": 0}, #26
-    {"time": 11992, "lane": 0}, #27
-    {"time": 12420, "lane": 3}, #28
-    {"time": 12848, "lane": 2}, #29
-    {"time": 13276, "lane": 3}, #30
-    {"time": 13276, "lane": 2}, #30
-    {"time": 13704, "lane": 3}, #31
-    {"time": 13704, "lane": 2}, #31
-    {"time": 14132, "lane": 3}, #32
-    {"time": 14132, "lane": 2}, #32
-]
+chart = TestLevel_chart.TestLevel_notes
 
 def start_test_level(screen):
     global score
@@ -96,7 +58,7 @@ def start_test_level(screen):
     chart_index = 0
     notes = []
 
-    pygame.mixer.music.load("Charts/TestLevel/test-level.wav")
+    pygame.mixer.music.load("/Charts/TestLevel/test-level.wav")
     pygame.mixer.music.set_volume(0.2)
     HitSound.set_volume(0.1)
     ComboBreak.set_volume(0.1)
