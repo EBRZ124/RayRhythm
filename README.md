@@ -18,6 +18,10 @@ Made with PyGame library: https://www.pygame.org/
 
 <img width="1671" height="1046" alt="image" src="https://github.com/user-attachments/assets/675e6b28-d6fd-4a76-8075-2cc0950999e3" />
 
+### Result screen
+
+<img width="1676" height="1044" alt="Screenshot 2025-11-16 at 16 17 54" src="https://github.com/user-attachments/assets/19cea448-0bad-485c-9539-2d7835a9ef2e" />
+
 ## Files
 
     .
