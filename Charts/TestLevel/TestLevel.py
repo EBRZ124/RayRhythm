@@ -48,6 +48,37 @@ skin_variant = 1
 
 chart = TestLevel_chart.TestLevel_notes
 
+def show_result_screen(screen, final_score, final_max_combo):
+    result_screen = True
+    while result_screen:
+        PLAY_MOUSE_POS = pygame.mouse.get_pos()
+
+        screen.blit(TestBackground, (0, 0))
+        screen.blit(ResultScreen, (0, 0))
+
+        Final_Score_Text = result_screen_font(45).render(f"Total score: {final_score}", True, "White")
+        Final_Score_Rect = Final_Score_Text.get_rect(center=(840, 450))
+        screen.blit(Final_Score_Text, Final_Score_Rect)
+
+        Max_Combo = result_screen_font(45).render(f"Your max combo: {final_max_combo}", True, "White")
+        Max_Combo_Rect = Max_Combo.get_rect(center=(840, 550))
+        screen.blit(Max_Combo, Max_Combo_Rect)
+
+        EXIT_BUTTON = Button(image=None, pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="Blue")
+        EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
+        EXIT_BUTTON.update(screen)  
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if EXIT_BUTTON.checkForInput(PLAY_MOUSE_POS):
+                    click_SFX.play()
+                    result_screen = False
+        
+        pygame.display.update()
+
 def start_test_level(screen):
     global score
     score = 0
@@ -90,10 +121,6 @@ def start_test_level(screen):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if EXIT_BUTTON.checkForInput(PLAY_MOUSE_POS):
-                    click_SFX.play()
-                    running = False
 
             if event.type == pygame.KEYDOWN:
                 for lane, key in enumerate(player_keys):
@@ -193,8 +220,6 @@ def start_test_level(screen):
         screen.blit(combo_text, (100, 150))
 
         # ----------------LEVEL FINISHED----------------
-        PLAY_MOUSE_POS = pygame.mouse.get_pos()
-
         level_done = (
             chart_index >= len(chart) and
             len(notes) == 0 and
@@ -203,23 +228,10 @@ def start_test_level(screen):
         )
 
         if level_done:
-            pygame.time.wait(500)
-            screen.blit(ResultScreen, (0, 0))
-            pygame.display.flip()
+            show_result_screen(screen, score, max_combo)
+            running = False
 
-            Final_Score_Text = result_screen_font(45).render(f"Total score: {score}", True, "White")
-            Final_Score_Rect = Final_Score_Text.get_rect(center=(840, 450))
-            screen.blit(Final_Score_Text, Final_Score_Rect)
-
-            Max_Combo = result_screen_font(45).render(f"Your max combo: {max_combo}", True, "White")
-            Max_Combo_Rect = Max_Combo.get_rect(center=(840, 550))
-            screen.blit(Max_Combo, Max_Combo_Rect)
-
-            EXIT_BUTTON = Button(image=None, pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="White")
-            EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
-            EXIT_BUTTON.update(screen)
-
-        pygame.display.flip()
+        pygame.display.update()
 
         if keys[pygame.K_ESCAPE]:
             running = False
