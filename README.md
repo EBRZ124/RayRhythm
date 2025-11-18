@@ -41,7 +41,7 @@ Made with PyGame library: https://www.pygame.org/
 
 - Settings menu - change music and sound effect volume and change the skin (currently there are two, but they're hard coded)
 
-- Display max combo at the end of the chart
+- ~Display max combo at the end of the chart~ (Done 17.11.2025.)
 
 - 3 total charts
 
