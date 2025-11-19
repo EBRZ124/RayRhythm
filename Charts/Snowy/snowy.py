@@ -13,6 +13,7 @@ GameplayOverlay = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graph
 # Circle skin assets
 PressedCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_pressed.png")
 RegularCirlce = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
+PlayingCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/playing-circle.png")
 FallingNote = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
 
 # Result screen
@@ -55,14 +56,15 @@ def show_result_screen(screen, final_score, final_max_combo):
         screen.blit(ResultScreen, (0, 0))
 
         Final_Score_Text = result_screen_font(45).render(f"Total score: {final_score}", True, "White")
-        Final_Score_Rect = Final_Score_Text.get_rect(center=(840, 450))
+        Final_Score_Rect = Final_Score_Text.get_rect(center=(840, 475))
         screen.blit(Final_Score_Text, Final_Score_Rect)
 
         Max_Combo = result_screen_font(45).render(f"Your max combo: {final_max_combo}", True, "White")
-        Max_Combo_Rect = Max_Combo.get_rect(center=(840, 550))
+        Max_Combo_Rect = Max_Combo.get_rect(center=(840, 600))
         screen.blit(Max_Combo, Max_Combo_Rect)
 
-        EXIT_BUTTON = Button(image=None, pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="Blue")
+        EXIT_BUTTON = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/exit-result-button.png"), 
+                             pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="#9FDAEE")
         EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
         EXIT_BUTTON.update(screen)  
 
@@ -89,7 +91,7 @@ def start_snowy(screen):
     chart_index = 0
     notes = []
 
-    pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/Snowy/audio.mp3")
+    pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/Snowy/audio.wav")
     pygame.mixer.music.set_volume(0.05)
     HitSound.set_volume(0.2)
     ComboBreak.set_volume(0.2)
@@ -133,15 +135,15 @@ def start_snowy(screen):
                                     closest_dist = dist
                         
                         if closest_note:
-                            if closest_dist <= 50:
+                            if closest_dist <= 100:
                                 score += 100
                                 combo += 1
                                 closest_note["hit"] = True
-                            elif closest_dist <= 100:
+                            elif closest_dist <= 200:
                                 score += 50
                                 combo += 1
                                 closest_note["hit"] = True
-                            elif closest_dist <= 200:
+                            elif closest_dist <= 300:
                                 score += 25
                                 combo += 1
                                 closest_note["hit"] = True
@@ -180,12 +182,12 @@ def start_snowy(screen):
         screen.blit(GameplayOverlay, (0, 0)) 
 
         if skin_variant == 0:
-            screen.blit(RegularCirlce, (890, 880))
-            screen.blit(RegularCirlce, (1070, 880))
-            screen.blit(RegularCirlce, (1250, 880))
-            screen.blit(RegularCirlce, (1430, 880))
+            screen.blit(PlayingCircle, (890, 880))
+            screen.blit(PlayingCircle, (1070, 880))
+            screen.blit(PlayingCircle, (1250, 880))
+            screen.blit(PlayingCircle, (1430, 880))
             for x in chart_lanes:
-                screen.blit(RegularCirlce, (x, target_y_coordinate))
+                screen.blit(PlayingCircle, (x, target_y_coordinate))
             for n in notes:
                 x = chart_lanes[n["lane"]]
                 screen.blit(FallingNote, (x, n["y"]))
@@ -213,7 +215,7 @@ def start_snowy(screen):
         score_text = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_text, (100, 100))
 
-        combo_text = font.render(f"Combo: {combo}", True, (255, 255, 255))
+        combo_text = font.render(f"Combo: {combo}x", True, (255, 255, 255))
         screen.blit(combo_text, (100, 150))
 
         # ----------------LEVEL FINISHED----------------
