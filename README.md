@@ -20,7 +20,7 @@ Made with PyGame library: https://www.pygame.org/
 
 ### Result screen
 
-<img width="3354" height="2058" alt="image" src="https://github.com/user-attachments/assets/f68db49a-8a7c-451e-aea3-8d1a0477011f" />
+<img width="3354" height="2054" alt="image" src="https://github.com/user-attachments/assets/67fbfc0c-996f-428f-ab61-8195e0117811" />
 
 
 ## Files
