@@ -10,13 +10,9 @@ Made with PyGame library: https://www.pygame.org/
 
 <img width="1674" height="1043" alt="image" src="https://github.com/user-attachments/assets/88955956-5eca-4ef3-9fc0-b3b69c5e894e" />
 
-### Skin #1 (Rayman Skin)
+### Gameplay
 
-<img width="1663" height="1039" alt="image" src="https://github.com/user-attachments/assets/88d53798-2082-44ad-b357-ed7ce45d1b70" />
-
-### Skin #2 (Circle Skin)
-
-<img width="1671" height="1046" alt="image" src="https://github.com/user-attachments/assets/675e6b28-d6fd-4a76-8075-2cc0950999e3" />
+![RayRhythm_Gameplay](https://github.com/user-attachments/assets/61629bbb-e72f-4d6d-9a46-996072d747c4)
 
 ### Result screen
 
