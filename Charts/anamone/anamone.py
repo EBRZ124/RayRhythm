@@ -136,16 +136,16 @@ def start_anamone(screen):
                         
                         if closest_note:
                             if closest_dist <= 150:
-                                score += 100
                                 combo += 1
+                                score += 100 * combo
                                 closest_note["hit"] = True
                             elif closest_dist <= 250:
-                                score += 50
                                 combo += 1
+                                score += 50 * combo
                                 closest_note["hit"] = True
                             elif closest_dist <= 300:
-                                score += 25
                                 combo += 1
+                                score += 25 * combo
                                 closest_note["hit"] = True
                             elif closest_dist <= 400:
                                 if combo >= 3:

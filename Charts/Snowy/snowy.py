@@ -135,17 +135,17 @@ def start_snowy(screen):
                                     closest_dist = dist
                         
                         if closest_note:
-                            if closest_dist <= 100:
-                                score += 100
+                            if closest_dist <= 150:
                                 combo += 1
+                                score += 100 * combo
                                 closest_note["hit"] = True
-                            elif closest_dist <= 200:
-                                score += 50
+                            elif closest_dist <= 250:
                                 combo += 1
+                                score += 50 * combo
                                 closest_note["hit"] = True
                             elif closest_dist <= 300:
-                                score += 25
                                 combo += 1
+                                score += 25 * combo
                                 closest_note["hit"] = True
                             elif closest_dist <= 400:
                                 if combo >= 3:

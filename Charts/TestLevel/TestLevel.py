@@ -7,30 +7,31 @@ pygame.init()
 pygame.mixer.init()
 clock = pygame.time.Clock()
 
-TestBackground = pygame.image.load("/RayRhythm/Charts/TestLevel/test-level-background.png")
-GameplayOverlay = pygame.image.load("/RayRhythm/graphics/gameplay-field.png")
+TestBackground = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/TestLevel/test-level-background.png")
+GameplayOverlay = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/gameplay-field.png")
 
 # Circle skin assets
-PressedCircle = pygame.image.load("/RayRhythm/graphics/circle_pressed.png")
-RegularCirlce = pygame.image.load("/RayRhythm/graphics/circle_regular.png")
-FallingNote = pygame.image.load("/RayRhythm/graphics/circle_regular.png")
+PressedCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_pressed.png")
+RegularCirlce = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
+PlayingCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/playing-circle.png")
+FallingNote = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
 
 # Result screen
-ResultScreen = pygame.image.load("/RayRhythm/graphics/result-screen.png")
+ResultScreen = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/result-screen.png")
 
 # Fonts
 def result_screen_font(size):
-    return pygame.font.Font("/RayRhythm/fonts/capitolcity.ttf", size)
+    return pygame.font.Font("/Users/evaldsberzins/pygame/RayRhythm/fonts/capitolcity.ttf", size)
 
 # Rayman skin assets
-PressedRaymanCircle = pygame.image.load("/RayRhythm/graphics/pressed-rayman-circle.png")
-RegularRaymanCircle = pygame.image.load("/RayRhythm/graphics/regular-rayman-circle.png")
-FallingRaymanCircle = pygame.image.load("/RayRhythm/graphics/regular-rayman-circle.png")
+PressedRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/pressed-rayman-circle.png")
+RegularRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
+FallingRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
 
 # Sound effects
-HitSound = pygame.mixer.Sound("/RayRhythm/Charts/hit-sound.wav")
-ComboBreak = pygame.mixer.Sound("/RayRhythm/Charts/combo-break.wav")
-click_SFX = pygame.mixer.Sound("/RayRhythm/sounds/click-sound.wav")
+HitSound = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/hit-sound.wav")
+ComboBreak = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/combo-break.wav")
+click_SFX = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/sounds/click-sound.wav")
 click_SFX.set_volume(0.6)
 
 chart_lanes = [890, 1070, 1250, 1430]
@@ -57,14 +58,15 @@ def show_result_screen(screen, final_score, final_max_combo):
         screen.blit(ResultScreen, (0, 0))
 
         Final_Score_Text = result_screen_font(45).render(f"Total score: {final_score}", True, "White")
-        Final_Score_Rect = Final_Score_Text.get_rect(center=(840, 450))
+        Final_Score_Rect = Final_Score_Text.get_rect(center=(840, 475))
         screen.blit(Final_Score_Text, Final_Score_Rect)
 
         Max_Combo = result_screen_font(45).render(f"Your max combo: {final_max_combo}", True, "White")
-        Max_Combo_Rect = Max_Combo.get_rect(center=(840, 550))
+        Max_Combo_Rect = Max_Combo.get_rect(center=(840, 600))
         screen.blit(Max_Combo, Max_Combo_Rect)
 
-        EXIT_BUTTON = Button(image=None, pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="Blue")
+        EXIT_BUTTON = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/exit-result-button.png"), 
+                             pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="#9FDAEE")
         EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
         EXIT_BUTTON.update(screen)  
 
@@ -91,7 +93,7 @@ def start_test_level(screen):
     chart_index = 0
     notes = []
 
-    pygame.mixer.music.load("/RayRhythm/Charts/TestLevel/test-level.wav")
+    pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/TestLevel/test-level.wav")
     pygame.mixer.music.set_volume(0.2)
     HitSound.set_volume(0.1)
     ComboBreak.set_volume(0.1)
@@ -135,17 +137,17 @@ def start_test_level(screen):
                                     closest_dist = dist
                         
                         if closest_note:
-                            if closest_dist <= 50:
-                                score += 100
+                            if closest_dist <= 100:
                                 combo += 1
-                                closest_note["hit"] = True
-                            elif closest_dist <= 100:
-                                score += 50
-                                combo += 1
+                                score += 100 * combo
                                 closest_note["hit"] = True
                             elif closest_dist <= 200:
-                                score += 25
                                 combo += 1
+                                score += 50 * combo
+                                closest_note["hit"] = True
+                            elif closest_dist <= 300:
+                                combo += 1
+                                score += 25 * combo
                                 closest_note["hit"] = True
                             elif closest_dist <= 400:
                                 if combo >= 3:
@@ -183,12 +185,12 @@ def start_test_level(screen):
         screen.blit(GameplayOverlay, (0, 0)) 
 
         if skin_variant == 0:
-            screen.blit(RegularCirlce, (890, 880))
-            screen.blit(RegularCirlce, (1070, 880))
-            screen.blit(RegularCirlce, (1250, 880))
-            screen.blit(RegularCirlce, (1430, 880))
+            screen.blit(PlayingCircle, (890, 880))
+            screen.blit(PlayingCircle, (1070, 880))
+            screen.blit(PlayingCircle, (1250, 880))
+            screen.blit(PlayingCircle, (1430, 880))
             for x in chart_lanes:
-                screen.blit(RegularCirlce, (x, target_y_coordinate))
+                screen.blit(PlayingCircle, (x, target_y_coordinate))
             for n in notes:
                 x = chart_lanes[n["lane"]]
                 screen.blit(FallingNote, (x, n["y"]))
@@ -216,13 +218,13 @@ def start_test_level(screen):
         score_text = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_text, (100, 100))
 
-        combo_text = font.render(f"Combo: {combo}", True, (255, 255, 255))
+        combo_text = font.render(f"Combo: {combo}x", True, (255, 255, 255))
         screen.blit(combo_text, (100, 150))
 
         # ----------------LEVEL FINISHED----------------
         if combo == 38:
             max_combo = combo
-
+        
         level_done = (
             chart_index >= len(chart) and
             len(notes) == 0 and
