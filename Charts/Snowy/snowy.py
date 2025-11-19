@@ -219,7 +219,7 @@ def start_snowy(screen):
         screen.blit(combo_text, (100, 150))
 
         # ----------------LEVEL FINISHED----------------
-        if combo == 176: 
+        if combo > max_combo:
             max_combo = combo
 
         level_done = (

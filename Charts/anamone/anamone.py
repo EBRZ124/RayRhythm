@@ -219,7 +219,7 @@ def start_anamone(screen):
         screen.blit(combo_text, (100, 150))
 
         # ----------------LEVEL FINISHED----------------
-        if combo == 382:
+        if combo > max_combo:
             max_combo = combo
 
         level_done = (

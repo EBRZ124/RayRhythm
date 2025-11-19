@@ -222,7 +222,7 @@ def start_test_level(screen):
         screen.blit(combo_text, (100, 150))
 
         # ----------------LEVEL FINISHED----------------
-        if combo == 38:
+        if combo > max_combo:
             max_combo = combo
         
         level_done = (
