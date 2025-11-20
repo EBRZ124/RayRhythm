@@ -50,7 +50,7 @@ skin_variant = 1
 
 chart = TestLevel_chart.TestLevel_notes
 
-def show_result_screen(screen, final_score, final_max_combo):
+def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
     result_screen = True
     while result_screen:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
@@ -59,12 +59,16 @@ def show_result_screen(screen, final_score, final_max_combo):
         screen.blit(ResultScreen, (0, 0))
 
         Final_Score_Text = result_screen_font(45).render(f"Total score: {final_score}", True, "White")
-        Final_Score_Rect = Final_Score_Text.get_rect(center=(840, 475))
+        Final_Score_Rect = Final_Score_Text.get_rect(center=(840, 430))
         screen.blit(Final_Score_Text, Final_Score_Rect)
 
         Max_Combo = result_screen_font(45).render(f"Your max combo: {final_max_combo}", True, "White")
-        Max_Combo_Rect = Max_Combo.get_rect(center=(840, 600))
+        Max_Combo_Rect = Max_Combo.get_rect(center=(840, 530))
         screen.blit(Max_Combo, Max_Combo_Rect)
+
+        Final_acc = result_screen_font(45).render(f"Accuracy: {play_accuracy}%", True, "White")
+        Final_acc_Rect = Final_acc.get_rect(center=(840, 630))
+        screen.blit(Final_acc, Final_acc_Rect)
 
         EXIT_BUTTON = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/exit-result-button.png"), 
                              pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="#9FDAEE")
@@ -241,7 +245,7 @@ def start_test_level(screen, skin_used):
         )
 
         if level_done:
-            show_result_screen(screen, score, max_combo)
+            show_result_screen(screen, score, max_combo, rounded_acc)
             running = False
 
         pygame.display.update()
