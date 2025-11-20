@@ -7,31 +7,31 @@ pygame.init()
 pygame.mixer.init()
 clock = pygame.time.Clock()
 
-TestBackground = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/TestLevel/test-level-background.png")
-GameplayOverlay = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/gameplay-field.png")
+TestBackground = pygame.image.load("/RayRhythm/Charts/TestLevel/test-level-background.png")
+GameplayOverlay = pygame.image.load("/RayRhythm/graphics/gameplay-field.png")
 
 # Circle skin assets
-PressedCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_pressed.png")
-RegularCirlce = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
-PlayingCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/playing-circle.png")
-FallingNote = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
+PressedCircle = pygame.image.load("/RayRhythm/graphics/circle_pressed.png")
+RegularCirlce = pygame.image.load("/RayRhythm/graphics/circle_regular.png")
+PlayingCircle = pygame.image.load("/RayRhythm/graphics/playing-circle.png")
+FallingNote = pygame.image.load("/RayRhythm/graphics/circle_regular.png")
 
 # Result screen
-ResultScreen = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/result-screen.png")
+ResultScreen = pygame.image.load("/RayRhythm/graphics/result-screen.png")
 
 # Fonts
 def result_screen_font(size):
-    return pygame.font.Font("/Users/evaldsberzins/pygame/RayRhythm/fonts/capitolcity.ttf", size)
+    return pygame.font.Font("/RayRhythm/fonts/capitolcity.ttf", size)
 
 # Rayman skin assets
-PressedRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/pressed-rayman-circle.png")
-RegularRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
-FallingRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
+PressedRaymanCircle = pygame.image.load("/RayRhythm/graphics/pressed-rayman-circle.png")
+RegularRaymanCircle = pygame.image.load("/RayRhythm/graphics/regular-rayman-circle.png")
+FallingRaymanCircle = pygame.image.load("/RayRhythm/graphics/regular-rayman-circle.png")
 
 # Sound effects
-HitSound = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/hit-sound.wav")
-ComboBreak = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/combo-break.wav")
-click_SFX = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/sounds/click-sound.wav")
+HitSound = pygame.mixer.Sound("/RayRhythm/Charts/hit-sound.wav")
+ComboBreak = pygame.mixer.Sound("/RayRhythm/Charts/combo-break.wav")
+click_SFX = pygame.mixer.Sound("/RayRhythm/sounds/click-sound.wav")
 click_SFX.set_volume(0.6)
 
 chart_lanes = [890, 1070, 1250, 1430]
@@ -70,7 +70,7 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
         Final_acc_Rect = Final_acc.get_rect(center=(840, 630))
         screen.blit(Final_acc, Final_acc_Rect)
 
-        EXIT_BUTTON = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/exit-result-button.png"), 
+        EXIT_BUTTON = Button(image=pygame.image.load("/RayRhythm/graphics/exit-result-button.png"), 
                              pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="#9FDAEE")
         EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
         EXIT_BUTTON.update(screen)  
@@ -98,7 +98,7 @@ def start_test_level(screen, skin_used):
     chart_index = 0
     notes = []
 
-    pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/TestLevel/test-level.wav")
+    pygame.mixer.music.load("/RayRhythm/Charts/TestLevel/test-level.wav")
     pygame.mixer.music.set_volume(0.2)
     HitSound.set_volume(0.1)
     ComboBreak.set_volume(0.1)
@@ -252,3 +252,7 @@ def start_test_level(screen, skin_used):
 
         if keys[pygame.K_ESCAPE]:
             running = False
+            pygame.mixer_music.stop()
+            pygame.mixer_music.load("/RayRhythm/sounds/level_select_music.mp3")
+            pygame.mixer_music.set_volume(0.3)
+            pygame.mixer_music.play()
