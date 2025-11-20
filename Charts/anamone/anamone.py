@@ -7,31 +7,31 @@ pygame.init()
 pygame.mixer.init()
 clock = pygame.time.Clock()
 
-AnamoneBG = pygame.image.load("/RayRhythm/Charts/anamone/IdentityBG.png")
-GameplayOverlay = pygame.image.load("/RayRhythm/graphics/gameplay-field.png")
+AnamoneBG = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/anamone/IdentityBG.png")
+GameplayOverlay = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/gameplay-field.png")
 
 # Circle skin assets
-PressedCircle = pygame.image.load("/RayRhythm/graphics/circle_pressed.png")
-RegularCirlce = pygame.image.load("/RayRhythm/graphics/circle_regular.png")
-PlayingCircle = pygame.image.load("/RayRhythm/graphics/playing-circle.png")
-FallingNote = pygame.image.load("/RayRhythm/graphics/circle_regular.png")
+PressedCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_pressed.png")
+RegularCirlce = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
+PlayingCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/playing-circle.png")
+FallingNote = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
 
 # Result screen
-ResultScreen = pygame.image.load("/RayRhythm/graphics/result-screen.png")
+ResultScreen = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/result-screen.png")
 
 # Fonts
 def result_screen_font(size):
-    return pygame.font.Font("/RayRhythm/fonts/capitolcity.ttf", size)
+    return pygame.font.Font("/Users/evaldsberzins/pygame/RayRhythm/fonts/capitolcity.ttf", size)
 
 # Rayman skin assets
-PressedRaymanCircle = pygame.image.load("/RayRhythm/graphics/pressed-rayman-circle.png")
-RegularRaymanCircle = pygame.image.load("/RayRhythm/graphics/regular-rayman-circle.png")
-FallingRaymanCircle = pygame.image.load("/RayRhythm/graphics/regular-rayman-circle.png")
+PressedRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/pressed-rayman-circle.png")
+RegularRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
+FallingRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
 
 # Sound effects
-HitSound = pygame.mixer.Sound("/RayRhythm/Charts/hit-sound.wav")
-ComboBreak = pygame.mixer.Sound("/RayRhythm/Charts/combo-break.wav")
-click_SFX = pygame.mixer.Sound("/RayRhythm/sounds/click-sound.wav")
+HitSound = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/hit-sound.wav")
+ComboBreak = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/combo-break.wav")
+click_SFX = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/sounds/click-sound.wav")
 click_SFX.set_volume(0.6)
 
 chart_lanes = [890, 1070, 1250, 1430]
@@ -41,6 +41,7 @@ target_y_coordinate = 880
 score = 0
 combo = 0
 max_combo = 0
+accuracy = 100.00
 
 music_offset_ms = 2000
 spawn_lead_ms = 0
@@ -63,7 +64,7 @@ def show_result_screen(screen, final_score, final_max_combo):
         Max_Combo_Rect = Max_Combo.get_rect(center=(840, 600))
         screen.blit(Max_Combo, Max_Combo_Rect)
 
-        EXIT_BUTTON = Button(image=pygame.image.load("/RayRhythm/graphics/exit-result-button.png"), 
+        EXIT_BUTTON = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/exit-result-button.png"), 
                              pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="#9FDAEE")
         EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
         EXIT_BUTTON.update(screen)  
@@ -83,15 +84,16 @@ def start_anamone(screen, skin_used):
     global score
     score = 0
     global combo
-    combo = 0
-    max_combo = 0
     global skin_variant
+    global accuracy
     skin_variant = skin_used
+    max_combo = 0
     running = True
+    max_level_combo = 382
     chart_index = 0
     notes = []
 
-    pygame.mixer.music.load("/RayRhythm/Charts/anamone/anamone-chart.wav")
+    pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/anamone/anamone-chart.wav")
     pygame.mixer.music.set_volume(0.05)
     HitSound.set_volume(0.2)
     ComboBreak.set_volume(0.2)
@@ -135,23 +137,26 @@ def start_anamone(screen, skin_used):
                                     closest_dist = dist
                         
                         if closest_note:
-                            if closest_dist <= 150:
+                            if closest_dist <= 100:
                                 combo += 1
                                 score += 100 * combo
                                 closest_note["hit"] = True
-                            elif closest_dist <= 250:
+                            elif closest_dist <= 200:
                                 combo += 1
                                 score += 50 * combo
+                                accuracy -= (25/max_level_combo)
                                 closest_note["hit"] = True
                             elif closest_dist <= 300:
                                 combo += 1
                                 score += 25 * combo
+                                accuracy -= (50/max_level_combo)
                                 closest_note["hit"] = True
                             elif closest_dist <= 400:
                                 if combo >= 3:
                                     ComboBreak.play()
                                 if combo > max_combo:
                                     max_combo = combo
+                                accuracy -= (100/max_level_combo)
                                 combo = 0
                                 closest_note["hit"] = True
 
@@ -173,6 +178,7 @@ def start_anamone(screen, skin_used):
                     ComboBreak.play()
                 if combo > max_combo:
                     max_combo = combo
+                accuracy -= (100/max_level_combo)
                 combo = 0
                 n["hit"] = True
 
@@ -218,6 +224,9 @@ def start_anamone(screen, skin_used):
         combo_text = font.render(f"Combo: {combo}x", True, (255, 255, 255))
         screen.blit(combo_text, (100, 150))
 
+        rounded_acc = round(accuracy, 2)
+        combo_text = font.render(f"{rounded_acc}%", True, (255, 255, 255))
+        screen.blit(combo_text, (100, 200))
         # ----------------LEVEL FINISHED----------------
         if combo > max_combo:
             max_combo = combo

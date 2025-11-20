@@ -376,7 +376,7 @@ chart_notes = [
     {"time": 93630+note_delay, "lane": 3}, 
     {"time": 93630+note_delay, "lane": 0}, 
     {"time": 94080+note_delay, "lane": 3}, 
-    {"time": 94080+note_delay, "lane": 3}, 
+    {"time": 94080+note_delay, "lane": 1}, 
     {"time": 94530+note_delay, "lane": 0}, 
     {"time": 94530+note_delay, "lane": 1}, 
     {"time": 94980+note_delay, "lane": 2}, 
