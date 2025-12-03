@@ -1,5 +1,6 @@
 class Button():
 	def __init__(self, image, pos, text_input, font, base_color, hovering_color):
+		yposchange = 10
 		self.image = image
 		self.x_pos = pos[0]
 		self.y_pos = pos[1]
@@ -9,7 +10,8 @@ class Button():
 		self.text = self.font.render(self.text_input, True, self.base_color)
 		if self.image is None:
 			self.image = self.text
-		self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
+			yposchange = 0
+		self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos-yposchange))
 		self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
 
 	def update(self, screen):

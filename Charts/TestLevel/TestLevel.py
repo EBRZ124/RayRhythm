@@ -2,32 +2,34 @@ import pygame, sys, random
 from button import Button
 import time
 from Charts.TestLevel import TestLevel_chart
+import global_variables
 
 pygame.init()
 pygame.mixer.init()
 clock = pygame.time.Clock()
+screen_scale = global_variables.global_scaler
 
-TestBackground = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/TestLevel/test-level-background.png")
-GameplayOverlay = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/gameplay-field.png")
-StartScreen = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/level-start-screen.png")
+TestBackground = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/TestLevel/test-level-background.png"), screen_scale)
+GameplayOverlay = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/gameplay-field.png"), screen_scale)
+StartScreen = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/level-start-screen.png"), screen_scale)
 
 # Circle skin assets
-PressedCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_pressed.png")
-RegularCirlce = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
-PlayingCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/playing-circle.png")
-FallingNote = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png")
+PressedCircle = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_pressed.png"), screen_scale)
+RegularCirlce = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png"), screen_scale)
+PlayingCircle = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/playing-circle.png"), screen_scale)
+FallingNote = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/circle_regular.png"), screen_scale)
 
 # Result screen
-ResultScreen = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/result-screen.png")
+ResultScreen = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/result-screen.png"), screen_scale)
 
 # Fonts
 def result_screen_font(size):
     return pygame.font.Font("/Users/evaldsberzins/pygame/RayRhythm/fonts/capitolcity.ttf", size)
 
 # Rayman skin assets
-PressedRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/pressed-rayman-circle.png")
-RegularRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
-FallingRaymanCircle = pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png")
+PressedRaymanCircle = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/pressed-rayman-circle.png"), screen_scale)
+RegularRaymanCircle = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png"), screen_scale)
+FallingRaymanCircle = pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/regular-rayman-circle.png"), screen_scale)
 
 # Sound effects
 HitSound = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/hit-sound.wav")
@@ -35,17 +37,25 @@ ComboBreak = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/co
 click_SFX = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/sounds/click-sound.wav")
 click_SFX.set_volume(0.6)
 
-chart_lanes = [890, 1070, 1250, 1430]
+chart_lanes = [890*screen_scale, 1070*screen_scale, 1250*screen_scale, 1430*screen_scale]
 player_keys = [pygame.K_d, pygame.K_f, pygame.K_j, pygame.K_k]
-note_speed = 20
-target_y_coordinate = 880
+note_speed = 20*screen_scale
+target_y_coordinate = 880*screen_scale
 score = 0
 combo = 0
 max_combo = 0
 accuracy = 100.00
 
-music_offset_ms = 2000
+# I got no clue why the delay differs (migh fix later)
+if(screen_scale == 1):
+    music_offset_ms = 2000
+elif(screen_scale == 0.7):
+    music_offset_ms = 1670
+elif(screen_scale == 0.5):
+    music_offset_ms = 1620
+
 spawn_lead_ms = 0
+
 
 skin_variant = 1
 
@@ -59,20 +69,20 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
         screen.blit(TestBackground, (0, 0))
         screen.blit(ResultScreen, (0, 0))
 
-        Final_Score_Text = result_screen_font(45).render(f"Total score: {final_score}", True, "White")
-        Final_Score_Rect = Final_Score_Text.get_rect(center=(840, 430))
+        Final_Score_Text = result_screen_font(int(45*screen_scale)).render(f"Total score: {final_score}", True, "White")
+        Final_Score_Rect = Final_Score_Text.get_rect(center=(840*screen_scale, 430*screen_scale))
         screen.blit(Final_Score_Text, Final_Score_Rect)
 
-        Max_Combo = result_screen_font(45).render(f"Your max combo: {final_max_combo}", True, "White")
-        Max_Combo_Rect = Max_Combo.get_rect(center=(840, 530))
+        Max_Combo = result_screen_font(int(45*screen_scale)).render(f"Your max combo: {final_max_combo}", True, "White")
+        Max_Combo_Rect = Max_Combo.get_rect(center=(840*screen_scale, 530*screen_scale))
         screen.blit(Max_Combo, Max_Combo_Rect)
 
-        Final_acc = result_screen_font(45).render(f"Accuracy: {play_accuracy}%", True, "White")
-        Final_acc_Rect = Final_acc.get_rect(center=(840, 630))
+        Final_acc = result_screen_font(int(45*screen_scale)).render(f"Accuracy: {play_accuracy}%", True, "White")
+        Final_acc_Rect = Final_acc.get_rect(center=(840*screen_scale, 630*screen_scale))
         screen.blit(Final_acc, Final_acc_Rect)
 
-        EXIT_BUTTON = Button(image=pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/exit-result-button.png"), 
-                             pos=(840, 750), text_input="Exit level", font = pygame.font.Font(None, 80), base_color="White", hovering_color="#9FDAEE")
+        EXIT_BUTTON = Button(image=pygame.transform.scale_by(pygame.image.load("/Users/evaldsberzins/pygame/RayRhythm/graphics/exit-result-button.png"), screen_scale), 
+                             pos=(840*screen_scale, 750*screen_scale), text_input="Exit level", font = pygame.font.Font(None, int(80*screen_scale)), base_color="White", hovering_color="#9FDAEE")
         EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
         EXIT_BUTTON.update(screen)  
 
@@ -87,12 +97,16 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
         
         pygame.display.update()
 
-def start_test_level(screen, skin_used):
+def start_test_level(screen, skin_used, screen_scale):
     global score
     global combo
     global accuracy
+    accuracy = 100
+    combo = 0
+    score = 0
     max_combo = 0
     max_level_combo = 38
+    circles_fallen = 0
     global skin_variant
     skin_variant = skin_used
     running = False
@@ -144,6 +158,7 @@ def start_test_level(screen, skin_used):
             n = chart[chart_index]
             notes.append({"lane": n["lane"], "y": -50, "hit": False, "time": n["time"]})
             chart_index += 1
+            circles_fallen += 1
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -163,21 +178,21 @@ def start_test_level(screen, skin_used):
                                     closest_dist = dist
                         
                         if closest_note:
-                            if closest_dist <= 100:
+                            if closest_dist <= 100*screen_scale:
                                 combo += 1
                                 score += 100 * combo
                                 closest_note["hit"] = True
-                            elif closest_dist <= 200:
+                            elif closest_dist <= 200*screen_scale:
                                 combo += 1
                                 score += 50 * combo
                                 accuracy -= (25/max_level_combo)
                                 closest_note["hit"] = True
-                            elif closest_dist <= 300:
+                            elif closest_dist <= 300*screen_scale:
                                 combo += 1
                                 score += 25 * combo
                                 accuracy -= (50/max_level_combo)
                                 closest_note["hit"] = True
-                            elif closest_dist <= 400:
+                            elif closest_dist <= 400*screen_scale:
                                 if combo >= 3:
                                     ComboBreak.play()
                                 if combo > max_combo:
@@ -215,10 +230,10 @@ def start_test_level(screen, skin_used):
         screen.blit(GameplayOverlay, (0, 0)) 
 
         if skin_variant == 0:
-            screen.blit(PlayingCircle, (890, 880))
-            screen.blit(PlayingCircle, (1070, 880))
-            screen.blit(PlayingCircle, (1250, 880))
-            screen.blit(PlayingCircle, (1430, 880))
+            screen.blit(PlayingCircle, (890*screen_scale, 880*screen_scale))
+            screen.blit(PlayingCircle, (1070*screen_scale, 880*screen_scale))
+            screen.blit(PlayingCircle, (1250*screen_scale, 880*screen_scale))
+            screen.blit(PlayingCircle, (1430*screen_scale, 880*screen_scale))
             for x in chart_lanes:
                 screen.blit(PlayingCircle, (x, target_y_coordinate))
             for n in notes:
@@ -230,10 +245,10 @@ def start_test_level(screen, skin_used):
                     screen.blit(PressedCircle, (chart_lanes[lane], target_y_coordinate))
 
         if skin_variant == 1:
-            screen.blit(RegularRaymanCircle, (890, 880))
-            screen.blit(RegularRaymanCircle, (1070, 880))
-            screen.blit(RegularRaymanCircle, (1250, 880))
-            screen.blit(RegularRaymanCircle, (1430, 880))
+            screen.blit(RegularRaymanCircle, (890*screen_scale, 880*screen_scale))
+            screen.blit(RegularRaymanCircle, (1070*screen_scale, 880*screen_scale))
+            screen.blit(RegularRaymanCircle, (1250*screen_scale, 880*screen_scale))
+            screen.blit(RegularRaymanCircle, (1430*screen_scale, 880*screen_scale))
             for x in chart_lanes:
                 screen.blit(RegularRaymanCircle, (x, target_y_coordinate))
             for n in notes:
@@ -244,16 +259,16 @@ def start_test_level(screen, skin_used):
                 if keys[key]:
                     screen.blit(PressedRaymanCircle, (chart_lanes[lane], target_y_coordinate))
 
-        font = pygame.font.Font(None, 60)
+        font = pygame.font.Font(None, int(60*screen_scale))
         score_text = font.render(f"Score: {score}", True, (255, 255, 255))
-        screen.blit(score_text, (100, 100))
+        screen.blit(score_text, (100*screen_scale, 100*screen_scale))
 
         combo_text = font.render(f"Combo: {combo}x", True, (255, 255, 255))
-        screen.blit(combo_text, (100, 150))
+        screen.blit(combo_text, (100*screen_scale, 150*screen_scale))
 
         rounded_acc = round(accuracy, 2)
         combo_text = font.render(f"{rounded_acc}%", True, (255, 255, 255))
-        screen.blit(combo_text, (100, 200))
+        screen.blit(combo_text, (100*screen_scale, 200*screen_scale))
         # ----------------LEVEL FINISHED----------------
         if combo > max_combo:
             max_combo = combo
