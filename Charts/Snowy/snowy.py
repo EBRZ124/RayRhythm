@@ -48,7 +48,7 @@ max_combo = 0
 accuracy = 100.00 
 
 if(screen_scale == 1):
-    music_offset_ms = 3000
+    music_offset_ms = 3360
 if(screen_scale == 0.7):
     music_offset_ms = 3020
 if(screen_scale == 0.5):
