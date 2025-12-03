@@ -1,6 +1,6 @@
 import pygame
 
-global_scaler = 0.7
+global_scaler = 0.5
 
 # ------------------------ MAIN MENU ASSETS ------------------------
 main_menu_bg =  pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/background2.jpg"), global_scaler)
@@ -17,8 +17,18 @@ circle_skin_selected = pygame.transform.scale_by(pygame.image.load("/RayRhythm/g
 circle_skin_unselected = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/circle-skin-button.png"), global_scaler)
 rayman_skin_unselected = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/rayman-skin-button.png"), global_scaler)
 rayman_skin_selected = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/rayman-skin-selected.png"), global_scaler)
+sopranos_skin_unselected = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/soprano-skin-button.png"), global_scaler)
+sopranos_skin_selected = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/soprano-skin-selected.png"), global_scaler)
 
+pressed_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/circle_pressed.png"), global_scaler)
+regular_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/circle_regular.png"), global_scaler)
+playing_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/playing-circle.png"), global_scaler)
 
+pressed_rayman_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/pressed-rayman-circle.png"), global_scaler)
+regular_rayman_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/regular-rayman-circle.png"), global_scaler)
+
+pressed_soprano_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/pressed-soprano-circle.png"), global_scaler)
+regular_soprano_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/regular-soprano-circle.png"), global_scaler)
 
 # ------------------------ LEVEL IMAGES ------------------------
 snowy_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/level-2.png"), global_scaler)
@@ -40,15 +50,9 @@ gameplay_overlay = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graph
 start_screen = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/level-start-screen.png"), global_scaler)
 result_screen = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/result-screen.png"), global_scaler)
 
-pressed_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/circle_pressed.png"), global_scaler)
-regular_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/circle_regular.png"), global_scaler)
-playing_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/playing-circle.png"), global_scaler)
-
-pressed_rayman_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/pressed-rayman-circle.png"), global_scaler)
-regular_rayman_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/regular-rayman-circle.png"), global_scaler)
-
 exit_button_results = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/exit-result-button.png"), global_scaler)
 
 # ------------------------ LEVEL BGS ------------------------
 test_background = pygame.transform.scale_by(pygame.image.load("/RayRhythm/Charts/TestLevel/test-level-background.png"), global_scaler)
 snowy_background = pygame.transform.scale_by(pygame.image.load("//RayRhythm/Charts/Snowy/SnowyBG.png"), global_scaler)
+anemone_background = pygame.transform.scale_by(pygame.image.load("/RayRhythm/Charts/anamone/IdentityBG.png"), global_scaler)

@@ -19,23 +19,28 @@ RegularCirlce = global_variables.regular_circle
 PlayingCircle = global_variables.playing_circle
 FallingNote = global_variables.regular_circle
 
-# Result screen
-ResultScreen = global_variables.result_screen
-
 # Rayman skin assets
 PressedRaymanCircle = global_variables.pressed_rayman_circle
 RegularRaymanCircle = global_variables.regular_rayman_circle
 FallingRaymanCircle = global_variables.regular_rayman_circle
 
+# Soprano skin assets
+PressedSopranoCircle = global_variables.pressed_soprano_circle
+RegularSopranoCircle = global_variables.regular_soprano_circle
+FallingSopranoCircle = global_variables.regular_soprano_circle
+
+# Result screen
+ResultScreen = global_variables.result_screen
+
 # Sound effects
-HitSound = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/hit-sound.wav")
-ComboBreak = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/Charts/combo-break.wav")
-click_SFX = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/sounds/click-sound.wav")
+HitSound = pygame.mixer.Sound("/RayRhythm/Charts/hit-sound.wav")
+ComboBreak = pygame.mixer.Sound("/RayRhythm/Charts/combo-break.wav")
+click_SFX = pygame.mixer.Sound("/RayRhythm/sounds/click-sound.wav")
 click_SFX.set_volume(0.6)
 
 chart_lanes = [890*screen_scale, 1070*screen_scale, 1250*screen_scale, 1430*screen_scale]
 player_keys = [pygame.K_d, pygame.K_f, pygame.K_j, pygame.K_k]
-note_speed = 20*screen_scale
+note_speed = 30*screen_scale
 target_y_coordinate = 880*screen_scale
 score = 0
 combo = 0
@@ -43,11 +48,11 @@ max_combo = 0
 accuracy = 100.00 
 
 if(screen_scale == 1):
-    music_offset_ms = 2000
-if(screen_scale == 0.7):
-    music_offset_ms = 2330
-if(screen_scale == 0.5):
     music_offset_ms = 2400
+if(screen_scale == 0.7):
+    music_offset_ms = 2100
+if(screen_scale == 0.5):
+    music_offset_ms = 2100
 spawn_lead_ms = 0
 
 chart = anamone_chart.chart_notes
@@ -119,7 +124,7 @@ def start_anamone(screen, skin_used, screen_scale):
         pygame.display.flip()
         clock.tick(60)
 
-    pygame.mixer.music.load("/Users/evaldsberzins/pygame/RayRhythm/Charts/anamone/anamone-chart.wav")
+    pygame.mixer.music.load("/RayRhythm/Charts/anamone/anamone-chart.wav")
     pygame.mixer.music.set_volume(0.05)
     HitSound.set_volume(0.2)
     ComboBreak.set_volume(0.2)
@@ -243,6 +248,22 @@ def start_anamone(screen, skin_used, screen_scale):
                 if keys[key]:
                     screen.blit(PressedRaymanCircle, (chart_lanes[lane], target_y_coordinate))
 
+
+        if skin_variant == 2:
+            screen.blit(RegularSopranoCircle, (890*screen_scale, 880*screen_scale))
+            screen.blit(RegularSopranoCircle, (1070*screen_scale, 880*screen_scale))
+            screen.blit(RegularSopranoCircle, (1250*screen_scale, 880*screen_scale))
+            screen.blit(RegularSopranoCircle, (1430*screen_scale, 880*screen_scale))
+            for x in chart_lanes:
+                screen.blit(RegularSopranoCircle, (x, target_y_coordinate))
+            for n in notes:
+                x = chart_lanes[n["lane"]]
+                screen.blit(FallingSopranoCircle, (x, n["y"]))
+            keys = pygame.key.get_pressed()
+            for lane, key in enumerate(player_keys):
+                if keys[key]:
+                    screen.blit(PressedSopranoCircle, (chart_lanes[lane], target_y_coordinate))
+
         font = pygame.font.Font(None, int(60*screen_scale))
         score_text = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_text, (100*screen_scale, 100*screen_scale))
@@ -273,6 +294,6 @@ def start_anamone(screen, skin_used, screen_scale):
         if keys[pygame.K_ESCAPE]:
             running = False
             pygame.mixer_music.stop()
-            pygame.mixer_music.load("/Users/evaldsberzins/pygame/RayRhythm/sounds/level_select_music.mp3")
+            pygame.mixer_music.load("/RayRhythm/sounds/level_select_music.mp3")
             pygame.mixer_music.set_volume(0.3)
             pygame.mixer_music.play()

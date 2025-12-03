@@ -19,15 +19,15 @@ OptionsMenuBG = global_variables.options_menu_bg
 music_volume = 0.5
 sound_effect_volume = 0.5
 
-pygame.mixer_music.load("/Users/evaldsberzins/pygame/RayRhythm/sounds/main_menu_music.mp3")
+pygame.mixer_music.load("/RayRhythm/sounds/main_menu_music.mp3")
 pygame.mixer_music.set_volume(music_volume)
-click_SFX = pygame.mixer.Sound("/Users/evaldsberzins/pygame/RayRhythm/sounds/click-sound.wav")
+click_SFX = pygame.mixer.Sound("/RayRhythm/sounds/click-sound.wav")
 click_SFX.set_volume(sound_effect_volume)
 
 selected_skin = 0
 
 def main_menu():
-    pygame.mixer_music.load("/Users/evaldsberzins/pygame/RayRhythm/sounds/main_menu_music.mp3")
+    pygame.mixer_music.load("/RayRhythm/sounds/main_menu_music.mp3")
     pygame.mixer_music.set_volume(music_volume)
     pygame.mixer_music.play()
     while True:
@@ -78,7 +78,7 @@ def main_menu():
     
 def play():
     pygame.mixer_music.stop()
-    pygame.mixer_music.load("/Users/evaldsberzins/pygame/RayRhythm/sounds/level_select_music.mp3")
+    pygame.mixer_music.load("/RayRhythm/sounds/level_select_music.mp3")
     music_volume = 0.3
     pygame.mixer_music.set_volume(music_volume)
     pygame.mixer_music.play()
@@ -117,11 +117,11 @@ def play():
                     click_SFX.play()
                     main_menu()
                 if LEVEL_ANEMONE.checkForInput(PLAY_MOUSE_POS):
-                    anamone.start_anamone(screen, selected_skin)
+                    anamone.start_anamone(screen, selected_skin, screen_scaler)
                 if TEST_LEVEL.checkForInput(PLAY_MOUSE_POS):
                     TestLevel.start_test_level(screen, selected_skin, screen_scaler)
                 if LEVEL_SNOWY.checkForInput(PLAY_MOUSE_POS):
-                    snowy.start_snowy(screen, selected_skin)
+                    snowy.start_snowy(screen, selected_skin, screen_scaler)
   
         pygame.display.update()
 
@@ -145,6 +145,9 @@ def options():
                 if SKIN_RAYMAN.checkForInput(OPTIONS_MOUSE_POS):
                     selected_skin = 1
                     click_SFX.play()
+                if SKIN_SOPRANO.checkForInput(OPTIONS_MOUSE_POS):
+                    selected_skin = 2
+                    click_SFX.play()
 
         screen.blit(OptionsMenuBG, (0, 0))
 
@@ -157,22 +160,43 @@ def options():
         screen.blit(SKINS_TEXT, SKINS_RECT)
 
         if selected_skin == 0:
-            SKIN_CIRCLE = Button(image=global_variables.circle_skin_selected, pos=(670*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_CIRCLE = Button(image=global_variables.circle_skin_selected, pos=(840*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_CIRCLE.changeColor(OPTIONS_MOUSE_POS)
             SKIN_CIRCLE.update(screen)
 
-            SKIN_RAYMAN = Button(image=global_variables.rayman_skin_unselected, pos=(1010*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_RAYMAN = Button(image=global_variables.rayman_skin_unselected, pos=(1150*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_RAYMAN.changeColor(OPTIONS_MOUSE_POS)
             SKIN_RAYMAN.update(screen)
 
+            SKIN_SOPRANO = Button(image=global_variables.sopranos_skin_unselected, pos=(530*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_SOPRANO.changeColor(OPTIONS_MOUSE_POS)
+            SKIN_SOPRANO.update(screen)
+
         if selected_skin == 1:
-            SKIN_CIRCLE = Button(image=global_variables.circle_skin_unselected, pos=(670*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_CIRCLE = Button(image=global_variables.circle_skin_unselected, pos=(840*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_CIRCLE.changeColor(OPTIONS_MOUSE_POS)
             SKIN_CIRCLE.update(screen)
 
-            SKIN_RAYMAN = Button(image=global_variables.rayman_skin_selected, pos=(1010*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_RAYMAN = Button(image=global_variables.rayman_skin_selected, pos=(1150*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_RAYMAN.changeColor(OPTIONS_MOUSE_POS)
-            SKIN_RAYMAN.update(screen)  
+            SKIN_RAYMAN.update(screen)
+
+            SKIN_SOPRANO = Button(image=global_variables.sopranos_skin_unselected, pos=(530*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_SOPRANO.changeColor(OPTIONS_MOUSE_POS)
+            SKIN_SOPRANO.update(screen)
+
+        if selected_skin == 2:
+            SKIN_CIRCLE = Button(image=global_variables.circle_skin_unselected, pos=(840*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_CIRCLE.changeColor(OPTIONS_MOUSE_POS)
+            SKIN_CIRCLE.update(screen)
+
+            SKIN_RAYMAN = Button(image=global_variables.rayman_skin_unselected, pos=(1150*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_RAYMAN.changeColor(OPTIONS_MOUSE_POS)
+            SKIN_RAYMAN.update(screen)
+
+            SKIN_SOPRANO = Button(image=global_variables.sopranos_skin_selected, pos=(530*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_SOPRANO.changeColor(OPTIONS_MOUSE_POS)
+            SKIN_SOPRANO.update(screen)
 
         OPTIONS_BACK = Button(image=None,pos=(840*screen_scaler, 950*screen_scaler),text_input="BACK",font=global_variables.get_main_menu_font(int(75*screen_scaler)),base_color="White",hovering_color="#F4CCFC")
         OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
