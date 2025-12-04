@@ -31,6 +31,7 @@ FallingSopranoCircle = global_variables.regular_soprano_circle
 
 # Result screen
 ResultScreen = global_variables.result_screen
+played_result_screen_sound = False
 
 # Sound effects
 ComboBreak = global_variables.combo_braek
@@ -58,6 +59,7 @@ chart = anamone_chart.chart_notes
 
 def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
     result_screen = True
+    global played_result_screen_sound
     while result_screen:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
 
@@ -79,21 +81,44 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
         if(play_accuracy == 100.00):
             ss_rank_image = global_variables.ss_rank
             screen.blit(ss_rank_image, (1075*screen_scale, 442*screen_scale))
+            if not played_result_screen_sound:
+                global_variables.ss_sound_effect.play()
+                played_result_screen_sound = True
+
         elif(play_accuracy<100.00 and play_accuracy>=93.00):
             s_rank_image = global_variables.s_rank
             screen.blit(s_rank_image, (1085*screen_scale, 442*screen_scale))
+            if not played_result_screen_sound:
+                global_variables.s_sound_effect.play()
+                played_result_screen_sound = True
+
         elif(play_accuracy<93.00 and play_accuracy>=80.00):
             a_rank_image = global_variables.a_rank
             screen.blit(a_rank_image, (1085*screen_scale, 442*screen_scale))
+            if not played_result_screen_sound:
+                global_variables.a_sound_effect.play()
+                played_result_screen_sound = True
+
         elif(play_accuracy<80.00 and play_accuracy>=70.00):
             b_rank_image = global_variables.b_rank
             screen.blit(b_rank_image, (1085*screen_scale, 442*screen_scale))
+            if not played_result_screen_sound:
+                global_variables.b_sound_effect.play()
+                played_result_screen_sound = True
+
         elif(play_accuracy<70.00 and play_accuracy>=50.00):
             c_rank_image = global_variables.c_rank
             screen.blit(c_rank_image, (1085*screen_scale, 442*screen_scale))
+            if not played_result_screen_sound:
+                global_variables.c_sound_effect.play()
+                played_result_screen_sound = True
+
         elif(play_accuracy<50.00):
             d_rank_image = global_variables.d_rank
             screen.blit(d_rank_image, (1085*screen_scale, 442*screen_scale))
+            if not played_result_screen_sound:
+                global_variables.d_sound_effect.play()
+                played_result_screen_sound = True
 
         EXIT_BUTTON = Button(image=global_variables.exit_button_results, pos=(840*screen_scale, 750*screen_scale), text_input="Exit level", font = global_variables.get_level_name_font(int(50*screen_scale)), base_color="White", hovering_color="#9FDAEE")
         EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
@@ -141,6 +166,9 @@ def start_anamone(screen, skin_used, screen_scale):
                     ShowStartScreen = False
                     running = True
                 if event.key == pygame.K_ESCAPE:
+                    pygame.mixer_music.load(global_variables.level_select_music)
+                    pygame.mixer_music.set_volume(0.3)
+                    pygame.mixer_music.play()
                     ShowStartScreen = False
 
         screen.blit(AnamoneBG, (0, 0))

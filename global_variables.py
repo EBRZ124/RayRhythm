@@ -1,7 +1,7 @@
 import pygame
 pygame.init()
 pygame.mixer.init()
-global_scaler = 1
+global_scaler = 0.7
 
 # ------------------------ MAIN MENU ASSETS ------------------------
 main_menu_bg =  pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/background2.jpg"), global_scaler)
@@ -54,11 +54,18 @@ result_screen = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics
 exit_button_results = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/exit-result-button.png"), global_scaler)
 
 ss_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/ss_rank.png"), global_scaler)
+ss_sound_effect = pygame.mixer.Sound("/RayRhythm/sounds/ss_clap_sound.wav")
 s_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/s_rank.png"), global_scaler)
+s_sound_effect = pygame.mixer.Sound("/RayRhythm/sounds/s_clap_sound.wav")
 a_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/a_rank.png"), global_scaler)
+a_sound_effect = pygame.mixer.Sound("/RayRhythm/sounds/a_sound_clap.wav")
 b_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/b_rank.png"), global_scaler)
+b_sound_effect = pygame.mixer.Sound("/RayRhythm/sounds/b_clap_sound.wav")
 c_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/c_rank.png"), global_scaler)
+c_sound_effect = pygame.mixer.Sound("/RayRhythm/sounds/c_clap_sound.wav")
 d_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/d_rank.png"), global_scaler)
+d_sound_effect = pygame.mixer.Sound("/RayRhythm/sounds/d_clap_sound.wav")
+
 
 # ------------------------ LEVEL ASSETS ------------------------
 test_background = pygame.transform.scale_by(pygame.image.load("/RayRhythm/Charts/TestLevel/test-level-background.png"), global_scaler)
