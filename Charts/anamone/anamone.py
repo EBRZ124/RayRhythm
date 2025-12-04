@@ -77,6 +77,25 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
         Final_acc_Rect = Final_acc.get_rect(center=(840*screen_scale, 630*screen_scale))
         screen.blit(Final_acc, Final_acc_Rect)
 
+        if(play_accuracy == 100.00):
+            ss_rank_image = global_variables.ss_rank
+            screen.blit(ss_rank_image, (1075*screen_scale, 442*screen_scale))
+        elif(play_accuracy<100.00 and play_accuracy>=93.00):
+            s_rank_image = global_variables.s_rank
+            screen.blit(s_rank_image, (1085*screen_scale, 442*screen_scale))
+        elif(play_accuracy<93.00 and play_accuracy>=80.00):
+            a_rank_image = global_variables.a_rank
+            screen.blit(a_rank_image, (1085*screen_scale, 442*screen_scale))
+        elif(play_accuracy<80.00 and play_accuracy>=70.00):
+            b_rank_image = global_variables.b_rank
+            screen.blit(b_rank_image, (1085*screen_scale, 442*screen_scale))
+        elif(play_accuracy<70.00 and play_accuracy>=50.00):
+            c_rank_image = global_variables.c_rank
+            screen.blit(c_rank_image, (1085*screen_scale, 442*screen_scale))
+        elif(play_accuracy<50.00):
+            d_rank_image = global_variables.d_rank
+            screen.blit(d_rank_image, (1085*screen_scale, 442*screen_scale))
+
         EXIT_BUTTON = Button(image=global_variables.exit_button_results, pos=(840*screen_scale, 750*screen_scale), text_input="Exit level", font = pygame.font.Font (None, int(80*screen_scale)), base_color="White", hovering_color="#9FDAEE")
         EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
         EXIT_BUTTON.update(screen)  
@@ -96,8 +115,10 @@ def start_anamone(screen, skin_used, screen_scale):
     global score
     score = 0
     global combo
+    combo = 0
     global skin_variant
     global accuracy
+    accuracy = 100.00
     skin_variant = skin_used
     max_combo = 0
     running = False

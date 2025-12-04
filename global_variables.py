@@ -1,6 +1,6 @@
 import pygame
 
-global_scaler = 0.5
+global_scaler = 0.7
 
 # ------------------------ MAIN MENU ASSETS ------------------------
 main_menu_bg =  pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/background2.jpg"), global_scaler)
@@ -51,6 +51,13 @@ start_screen = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/
 result_screen = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/result-screen.png"), global_scaler)
 
 exit_button_results = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/exit-result-button.png"), global_scaler)
+
+ss_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/ss_rank.png"), global_scaler)
+s_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/s_rank.png"), global_scaler)
+a_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/a_rank.png"), global_scaler)
+b_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/b_rank.png"), global_scaler)
+c_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/c_rank.png"), global_scaler)
+d_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/d_rank.png"), global_scaler)
 
 # ------------------------ LEVEL BGS ------------------------
 test_background = pygame.transform.scale_by(pygame.image.load("/RayRhythm/Charts/TestLevel/test-level-background.png"), global_scaler)
