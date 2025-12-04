@@ -122,6 +122,9 @@ def play():
                     TestLevel.start_test_level(screen, selected_skin, screen_scaler)
                 if LEVEL_SNOWY.checkForInput(PLAY_MOUSE_POS):
                     snowy.start_snowy(screen, selected_skin, screen_scaler)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    main_menu()
   
         pygame.display.update()
 
@@ -148,6 +151,9 @@ def options():
                 if SKIN_SOPRANO.checkForInput(OPTIONS_MOUSE_POS):
                     selected_skin = 2
                     click_SFX.play()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    main_menu()
 
         screen.blit(OptionsMenuBG, (0, 0))
 

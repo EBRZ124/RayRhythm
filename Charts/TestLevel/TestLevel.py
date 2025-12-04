@@ -143,6 +143,8 @@ def start_test_level(screen, skin_used, screen_scale):
                 if event.key == pygame.K_SPACE:
                     ShowStartScreen = False
                     running = True
+                if event.key == pygame.K_ESCAPE:
+                    ShowStartScreen = False
 
         screen.blit(TestBackground, (0, 0))
         screen.blit(GameplayOverlay, (0, 0))
