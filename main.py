@@ -1,10 +1,10 @@
 import pygame, sys
 from Charts.anamone import anamone
+from Charts.TestLevel import TestLevel
+from Charts.Snowy import snowy
 from button import Button
 from pygame_widgets.textbox import TextBox
 from pygame_widgets.slider import Slider
-from Charts.TestLevel import TestLevel
-from Charts.Snowy import snowy
 import global_variables
 
 pygame.init()
@@ -19,17 +19,17 @@ OptionsMenuBG = global_variables.options_menu_bg
 music_volume = 0.5
 sound_effect_volume = 0.5
 
-pygame.mixer_music.load("/RayRhythm/sounds/main_menu_music.mp3")
 pygame.mixer_music.set_volume(music_volume)
-click_SFX = pygame.mixer.Sound("/RayRhythm/sounds/click-sound.wav")
+click_SFX = global_variables.click_sound
 click_SFX.set_volume(sound_effect_volume)
 
 selected_skin = 0
 
 def main_menu():
-    pygame.mixer_music.load("/RayRhythm/sounds/main_menu_music.mp3")
     pygame.mixer_music.set_volume(music_volume)
-    pygame.mixer_music.play()
+    pygame.mixer_music.load(global_variables.main_menu_song)
+    pygame.mixer.music.play(-1)
+
     while True:
         screen.blit(BackGround1, (0, 0))
 
@@ -78,10 +78,11 @@ def main_menu():
     
 def play():
     pygame.mixer_music.stop()
-    pygame.mixer_music.load("/RayRhythm/sounds/level_select_music.mp3")
     music_volume = 0.3
     pygame.mixer_music.set_volume(music_volume)
+    pygame.mixer.music.load(global_variables.level_select_music)
     pygame.mixer_music.play()
+
     while True:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         LEVEL_MOUSE_POS = pygame.mouse.get_pos()
@@ -129,6 +130,10 @@ def play():
         pygame.display.update()
 
 def options():
+    pygame.mixer_music.load(global_variables.settings_menu_music)
+    pygame.mixer_music.set_volume(0.2)
+    pygame.mixer.music.play(-1)
+
     global selected_skin
     while True:
         events = pygame.event.get()
@@ -204,7 +209,7 @@ def options():
             SKIN_SOPRANO.changeColor(OPTIONS_MOUSE_POS)
             SKIN_SOPRANO.update(screen)
 
-        OPTIONS_BACK = Button(image=None,pos=(840*screen_scaler, 950*screen_scaler),text_input="BACK",font=global_variables.get_main_menu_font(int(75*screen_scaler)),base_color="White",hovering_color="#F4CCFC")
+        OPTIONS_BACK = Button(image=None,pos=(840*screen_scaler, 970*screen_scaler),text_input="BACK",font=global_variables.get_main_menu_font(int(75*screen_scaler)),base_color="White",hovering_color="#F4CCFC")
         OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
         OPTIONS_BACK.update(screen)
 

@@ -1,6 +1,7 @@
 import pygame
-
-global_scaler = 0.7
+pygame.init()
+pygame.mixer.init()
+global_scaler = 1
 
 # ------------------------ MAIN MENU ASSETS ------------------------
 main_menu_bg =  pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/background2.jpg"), global_scaler)
@@ -59,7 +60,21 @@ b_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/b_rank
 c_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/c_rank.png"), global_scaler)
 d_rank = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/d_rank.png"), global_scaler)
 
-# ------------------------ LEVEL BGS ------------------------
+# ------------------------ LEVEL ASSETS ------------------------
 test_background = pygame.transform.scale_by(pygame.image.load("/RayRhythm/Charts/TestLevel/test-level-background.png"), global_scaler)
 snowy_background = pygame.transform.scale_by(pygame.image.load("//RayRhythm/Charts/Snowy/SnowyBG.png"), global_scaler)
 anemone_background = pygame.transform.scale_by(pygame.image.load("/RayRhythm/Charts/anamone/IdentityBG.png"), global_scaler)
+
+anemone_song = "/RayRhythm/Charts/anamone/anamone-chart.wav"
+test_level_song = "/RayRhythm/Charts/TestLevel/test-level.wav"
+snowy_song = "/RayRhythm/Charts/Snowy/audio.wav"
+
+# ------------------------ SOUND ASSETS ------------------------
+click_sound = pygame.mixer.Sound("/RayRhythm/sounds/click-sound.wav")
+gat_sound = pygame.mixer.Sound("/RayRhythm/sounds/gat_sount.wav")
+hit_sound = pygame.mixer.Sound("/RayRhythm/Charts/hit-sound.wav")
+combo_braek = pygame.mixer.Sound("/RayRhythm/Charts/combo-break.wav")
+
+main_menu_song = "/RayRhythm/sounds/main_menu_music.mp3"
+level_select_music = "/RayRhythm/sounds/level_select_music.mp3"
+settings_menu_music = "/RayRhythm/sounds/settings_menu_music.mp3"

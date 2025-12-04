@@ -33,9 +33,8 @@ FallingSopranoCircle = global_variables.regular_soprano_circle
 ResultScreen = global_variables.result_screen
 
 # Sound effects
-HitSound = pygame.mixer.Sound("/RayRhythm/Charts/hit-sound.wav")
-ComboBreak = pygame.mixer.Sound("/RayRhythm/Charts/combo-break.wav")
-click_SFX = pygame.mixer.Sound("/RayRhythm/sounds/click-sound.wav")
+ComboBreak = global_variables.combo_braek
+click_SFX = global_variables.click_sound
 click_SFX.set_volume(0.6)
 
 chart_lanes = [890*screen_scale, 1070*screen_scale, 1250*screen_scale, 1430*screen_scale]
@@ -96,7 +95,7 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
             d_rank_image = global_variables.d_rank
             screen.blit(d_rank_image, (1085*screen_scale, 442*screen_scale))
 
-        EXIT_BUTTON = Button(image=global_variables.exit_button_results, pos=(840*screen_scale, 750*screen_scale), text_input="Exit level", font = pygame.font.Font (None, int(80*screen_scale)), base_color="White", hovering_color="#9FDAEE")
+        EXIT_BUTTON = Button(image=global_variables.exit_button_results, pos=(840*screen_scale, 750*screen_scale), text_input="Exit level", font = global_variables.get_level_name_font(int(50*screen_scale)), base_color="White", hovering_color="#9FDAEE")
         EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
         EXIT_BUTTON.update(screen)  
 
@@ -126,6 +125,10 @@ def start_snowy(screen, skin_used, screen_scale):
     max_level_combo = 176
     chart_index = 0
     notes = []
+    if (skin_variant==1 or skin_variant==0):
+        HitSound = global_variables.hit_sound
+    elif(skin_variant==2):
+        HitSound = global_variables.gat_sound
 
     while ShowStartScreen:
         pygame.mixer_music.stop()
@@ -147,7 +150,7 @@ def start_snowy(screen, skin_used, screen_scale):
         pygame.display.flip()
         clock.tick(60)
 
-    pygame.mixer.music.load("/RayRhythm/Charts/Snowy/audio.wav")
+    pygame.mixer.music.load(global_variables.snowy_song)
     pygame.mixer.music.set_volume(0.05)
     HitSound.set_volume(0.2)
     ComboBreak.set_volume(0.2)
@@ -316,6 +319,6 @@ def start_snowy(screen, skin_used, screen_scale):
         if keys[pygame.K_ESCAPE]: 
             running = False
             pygame.mixer_music.stop()
-            pygame.mixer_music.load("/RayRhythm/sounds/level_select_music.mp3")
+            pygame.mixer_music.load(global_variables.level_select_music)
             pygame.mixer_music.set_volume(0.3)
             pygame.mixer_music.play()
