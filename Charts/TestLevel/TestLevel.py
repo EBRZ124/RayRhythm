@@ -154,8 +154,10 @@ def start_test_level(screen, skin_used, screen_scale):
     ShowStartScreen = True
     chart_index = 0
     notes = []
-    if (skin_variant==1 or skin_variant==0):
+    if (skin_variant==0):
         HitSound = global_variables.hit_sound
+    elif(skin_variant==1):
+        HitSound = global_variables.rayman_sound
     elif(skin_variant==2):
         HitSound = global_variables.gat_sound
 

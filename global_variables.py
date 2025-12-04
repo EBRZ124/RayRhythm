@@ -79,6 +79,7 @@ snowy_song = "/RayRhythm/Charts/Snowy/audio.wav"
 # ------------------------ SOUND ASSETS ------------------------
 click_sound = pygame.mixer.Sound("/RayRhythm/sounds/click-sound.wav")
 gat_sound = pygame.mixer.Sound("/RayRhythm/sounds/gat_sount.wav")
+rayman_sound = pygame.mixer.Sound("/RayRhythm/sounds/rayman_sound.wav")
 hit_sound = pygame.mixer.Sound("/RayRhythm/Charts/hit-sound.wav")
 combo_braek = pygame.mixer.Sound("/RayRhythm/Charts/combo-break.wav")
 
