@@ -131,6 +131,11 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if EXIT_BUTTON.checkForInput(PLAY_MOUSE_POS):
                     click_SFX.play()
+                    pygame.mixer_music.stop()
+                    music_volume = 0.3
+                    pygame.mixer_music.set_volume(music_volume)
+                    pygame.mixer.music.load(global_variables.level_select_music)
+                    pygame.mixer_music.play()
                     played_result_screen_sound = False
                     result_screen = False
         
@@ -169,10 +174,10 @@ def start_snowy(screen, skin_used, screen_scale):
                     ShowStartScreen = False
                     running = True
                 if event.key == pygame.K_ESCAPE:
+                    ShowStartScreen = False
                     pygame.mixer_music.load(global_variables.level_select_music)
                     pygame.mixer_music.set_volume(0.3)
                     pygame.mixer_music.play()
-                    ShowStartScreen = False
 
         screen.blit(SnowyBG, (0, 0))
         screen.blit(GameplayOverlay, (0, 0))
@@ -348,8 +353,8 @@ def start_snowy(screen, skin_used, screen_scale):
         pygame.display.update()
 
         if keys[pygame.K_ESCAPE]: 
-            running = False
             pygame.mixer_music.stop()
             pygame.mixer_music.load(global_variables.level_select_music)
             pygame.mixer_music.set_volume(0.3)
             pygame.mixer_music.play()
+            running = False
