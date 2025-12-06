@@ -131,6 +131,7 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if EXIT_BUTTON.checkForInput(PLAY_MOUSE_POS):
                     click_SFX.play()
+                    played_result_screen_sound = False
                     result_screen = False
         
         pygame.display.update()
