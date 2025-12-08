@@ -89,7 +89,7 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
                 global_variables.d_sound_effect.play()
                 played_result_screen_sound = True
 
-        EXIT_BUTTON = Button(image=global_variables.exit_button_results, pos=(840*screen_scale, 750*screen_scale), text_input="Exit level", font = global_variables.get_level_name_font(int(50*screen_scale)), base_color="White", hovering_color="#9FDAEE")
+        EXIT_BUTTON = Button(image=global_variables.images["exit_button_results"], pos=(840*screen_scale, 750*screen_scale), text_input="Exit level", font = global_variables.get_level_name_font(int(50*screen_scale)), base_color="White", hovering_color="#9FDAEE")
         EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
         EXIT_BUTTON.update(screen)  
 
@@ -110,19 +110,14 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
         
         pygame.display.update()
 
-def start_anamone(screen, skin_used, screen_scale):
-    global score
-    score = 0
-    global combo
-    combo = 0
-    global skin_variant
-    global accuracy
-    accuracy = 100.00
+def start_anamone(screen, skin_used, screen_scale_passed):
+    global skin_variant, screen_scale
+    screen_scale = screen_scale_passed
+    max_level_combo = 382
+    circles_fallen = 0
     skin_variant = skin_used
-    max_combo = 0
     running = False
     ShowStartScreen = True
-    max_level_combo = 382
     chart_index = 0
     notes = []
 
