@@ -8,8 +8,14 @@ from pygame_widgets.slider import Slider
 import global_variables
 
 pygame.init()
+resolutions_16_10 = [
+    (840, 525), # scale = 0.5
+    (1176, 735), # scale = 0.7
+    (1680, 1050), # scale = 1
+]
+current_resolution = 1
 screen_scaler = global_variables.global_scaler
-screen = pygame.display.set_mode((1680*screen_scaler, 1050*screen_scaler))
+screen = pygame.display.set_mode(resolutions_16_10[current_resolution])
 pygame.display.set_caption("RayRhythm")
 
 BackGround1 = global_variables.main_menu_bg
@@ -23,7 +29,7 @@ pygame.mixer_music.set_volume(music_volume)
 click_SFX = global_variables.click_sound
 click_SFX.set_volume(sound_effect_volume)
 
-selected_skin = 0
+selected_skin = 1
 
 def main_menu():
     pygame.mixer_music.set_volume(music_volume)
@@ -62,7 +68,6 @@ def main_menu():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
                     click_SFX.play()
@@ -134,7 +139,8 @@ def options():
     pygame.mixer_music.set_volume(0.2)
     pygame.mixer.music.play(-1)
 
-    global selected_skin
+    global current_resolution, screen, screen_scaler, selected_skin
+
     while True:
         events = pygame.event.get()
         OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
@@ -147,15 +153,43 @@ def options():
                 if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
                     click_SFX.play()
                     main_menu()
+
                 if SKIN_CIRCLE.checkForInput(OPTIONS_MOUSE_POS):
                     selected_skin = 0
                     click_SFX.play()
+
                 if SKIN_RAYMAN.checkForInput(OPTIONS_MOUSE_POS):
                     selected_skin = 1
                     click_SFX.play()
+
                 if SKIN_SOPRANO.checkForInput(OPTIONS_MOUSE_POS):
                     selected_skin = 2
                     click_SFX.play()
+
+                if resolution_10.checkForInput(OPTIONS_MOUSE_POS):
+                    current_resolution = 2
+                    screen_scaler = 1
+                    global_variables.set_global_scaler(screen_scaler)
+                    width, heigth = resolutions_16_10[current_resolution]
+                    screen = pygame.display.set_mode((width, heigth))
+                    click_SFX.play()
+                
+                if resolution_07.checkForInput(OPTIONS_MOUSE_POS):
+                    current_resolution = 1
+                    screen_scaler = 0.7
+                    global_variables.set_global_scaler(screen_scaler)
+                    width, heigth = resolutions_16_10[current_resolution]
+                    screen = pygame.display.set_mode((width, heigth))
+                    click_SFX.play()
+
+                if resolution_05.checkForInput(OPTIONS_MOUSE_POS):
+                    current_resolution = 0
+                    screen_scaler = 0.5
+                    global_variables.set_global_scaler(screen_scaler)
+                    width, heigth = resolutions_16_10[current_resolution]
+                    screen = pygame.display.set_mode((width, heigth))
+                    click_SFX.play()                    
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     main_menu()
@@ -165,6 +199,22 @@ def options():
         OPTIONS_TEXT = global_variables.get_main_menu_font(int(75*screen_scaler)).render("Settings Menu", True, "White")
         OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(840*screen_scaler, 100*screen_scaler))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
+
+        SKINS_TEXT = global_variables.get_main_menu_font(int(60*screen_scaler)).render("Screen Scales/Resolutions", True, "White")
+        SKINS_RECT = SKINS_TEXT.get_rect(center=(840*screen_scaler, 200*screen_scaler))
+        screen.blit(SKINS_TEXT, SKINS_RECT)
+
+        resolution_05 = Button(image=global_variables.screen_scale_05, pos=(530*screen_scaler, 320*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+        resolution_05.changeColor(OPTIONS_MOUSE_POS)
+        resolution_05.update(screen)
+
+        resolution_07 = Button(image=global_variables.screen_scale_07, pos=(840*screen_scaler, 320*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+        resolution_07.changeColor(OPTIONS_MOUSE_POS)
+        resolution_07.update(screen)
+
+        resolution_10 = Button(image=global_variables.screen_scale_10, pos=(1150*screen_scaler, 320*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+        resolution_10.changeColor(OPTIONS_MOUSE_POS)
+        resolution_10.update(screen)
 
         SKINS_TEXT = global_variables.get_main_menu_font(int(60*screen_scaler)).render("SKINS", True, "White")
         SKINS_RECT = SKINS_TEXT.get_rect(center=(840*screen_scaler, 640*screen_scaler))

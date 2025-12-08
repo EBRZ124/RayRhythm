@@ -3,6 +3,10 @@ pygame.init()
 pygame.mixer.init()
 global_scaler = 0.7
 
+def set_global_scaler(value: float):
+    global global_scaler
+    global_scaler = value
+
 # ------------------------ MAIN MENU ASSETS ------------------------
 main_menu_bg =  pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/background2.jpg"), global_scaler)
 level_select_bg = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/level-select-background.png"), global_scaler)
@@ -12,6 +16,10 @@ tite_text_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics
 play_button_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/Play-Rect.png"), global_scaler)
 options_button_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/Options-Rect.png"), global_scaler)
 quit_button_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/Quit-Rect.png"),global_scaler)
+
+screen_scale_05 = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/05_screen_scale.png"), global_scaler)
+screen_scale_07 = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/07_screen_scale.png"), global_scaler)
+screen_scale_10 = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/10_screen_scale.png"), global_scaler)
 
 # ------------------------ SKIN ASSETS ------------------------
 circle_skin_selected = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/circle-skin-selected.png"), global_scaler)
@@ -32,9 +40,9 @@ pressed_soprano_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm
 regular_soprano_circle = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/regular-soprano-circle.png"), global_scaler)
 
 # ------------------------ LEVEL IMAGES ------------------------
-snowy_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/level-2.png"), global_scaler)
-test_level_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/test-level.png"), global_scaler)
-anemone_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/level-1.png"), global_scaler)
+snowy_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/level-2.png"), global_scaler*0.95)
+test_level_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/test-level.png"), global_scaler*0.95)
+anemone_box = pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/level-1.png"), global_scaler*0.95)
 
 # ------------------------ FONTS ------------------------
 def get_main_menu_font(size):
@@ -79,8 +87,8 @@ snowy_song = "/RayRhythm/Charts/Snowy/audio.wav"
 # ------------------------ SOUND ASSETS ------------------------
 click_sound = pygame.mixer.Sound("/RayRhythm/sounds/click-sound.wav")
 gat_sound = pygame.mixer.Sound("/RayRhythm/sounds/gat_sount.wav")
-rayman_sound = pygame.mixer.Sound("/RayRhythm/sounds/rayman_sound.wav")
 hit_sound = pygame.mixer.Sound("/RayRhythm/Charts/hit-sound.wav")
+rayman_sound = pygame.mixer.Sound("/RayRhythm/sounds/rayman_sound.wav")
 combo_braek = pygame.mixer.Sound("/RayRhythm/Charts/combo-break.wav")
 
 main_menu_song = "/RayRhythm/sounds/main_menu_music.mp3"
