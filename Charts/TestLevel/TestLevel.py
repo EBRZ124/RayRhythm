@@ -111,6 +111,10 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
                     pygame.mixer_music.play()
                     played_result_screen_sound = False
                     result_screen = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    result_screen = False  
+                    played_result_screen_sound = False
         
         pygame.display.update()
 
