@@ -1,11 +1,88 @@
 import pygame
 pygame.init()
 pygame.mixer.init()
+
 global_scaler = 0.7
+
+original_images = {}
+
+images = {}
+
+def load_assets():
+    global original_images
+
+    if original_images:
+        return
+    
+    original_images = {
+        # ------------------------ MENU ASSETS ------------------------
+        "main_menu_bg": pygame.image.load("/RayRhythm/graphics/background2.jpg"),
+        "options_menu_bg": pygame.image.load("/RayRhythm/graphics/options-menu-bg.png"),
+        "level_select_bg": pygame.image.load("/RayRhythm/graphics/level-select-background.png"),
+
+        "title_text_box": pygame.image.load("/RayRhythm/graphics/Title-Rect.png"),
+        "play_button_box": pygame.image.load("/RayRhythm/graphics/Play-Rect.png"),
+        "options_button_box": pygame.image.load("/RayRhythm/graphics/Options-Rect.png"),
+        "quit_button_box": pygame.image.load("/RayRhythm/graphics/Quit-Rect.png"),
+
+        "screen_scale_05": pygame.image.load("/RayRhythm/graphics/05_screen_scale.png"),
+        "screen_scale_07": pygame.image.load("/RayRhythm/graphics/07_screen_scale.png"),
+        "screen_scale_10": pygame.image.load("/RayRhythm/graphics/10_screen_scale.png"),
+
+        # ------------------------ SKIN ASSETS ------------------------
+        "circle_skin_selected": pygame.image.load("/RayRhythm/graphics/circle-skin-selected.png"),
+        "circle_skin_unselected": pygame.image.load("/RayRhythm/graphics/circle-skin-button.png"),
+        "rayman_skin_unselected": pygame.image.load("/RayRhythm/graphics/rayman-skin-button.png"),
+        "rayman_skin_selected": pygame.image.load("/RayRhythm/graphics/rayman-skin-selected.png"),
+        "sopranos_skin_unselected": pygame.image.load("/RayRhythm/graphics/soprano-skin-button.png"),
+        "sopranos_skin_selected": pygame.image.load("/RayRhythm/graphics/soprano-skin-selected.png"),
+
+        "pressed_circle": pygame.image.load("/RayRhythm/graphics/circle_pressed.png"),
+        "regular_circle": pygame.image.load("/RayRhythm/graphics/circle_regular.png"), 
+        "playing_circle": pygame.image.load("/RayRhythm/graphics/playing-circle.png"), 
+
+        "pressed_rayman_circle": pygame.image.load("/RayRhythm/graphics/pressed-rayman-circle.png"),
+        "regular_rayman_circle": pygame.image.load("/RayRhythm/graphics/regular-rayman-circle.png"), 
+
+        "pressed_soprano_circle": pygame.image.load("/RayRhythm/graphics/pressed-soprano-circle.png"),
+        "regular_soprano_circle": pygame.image.load("/RayRhythm/graphics/regular-soprano-circle.png"), 
+
+        # ------------------------ LEVEL IMAGES ------------------------
+        "snowy_box": pygame.image.load("/RayRhythm/graphics/level-2.png"), 
+        "test_level_box": pygame.image.load("/RayRhythm/graphics/test-level.png"), 
+        "anemone_box": pygame.image.load("/RayRhythm/graphics/level-1.png"), 
+
+        # ------------------------ UNIVERSAL LEVEL ASSETS ------------------------
+        "gameplay_overlay": pygame.image.load("/RayRhythm/graphics/gameplay-field.png"),
+        "start_screen": pygame.image.load("/RayRhythm/graphics/level-start-screen.png"), 
+        "result_screen": pygame.image.load("/RayRhythm/graphics/result-screen.png"),
+
+        "exit_button_results": pygame.image.load("/RayRhythm/graphics/exit-result-button.png"),
+        "ss_rank": pygame.image.load("/RayRhythm/graphics/ss_rank.png"), 
+        "s_rank": pygame.image.load("/RayRhythm/graphics/s_rank.png"), 
+        "a_rank": pygame.image.load("/RayRhythm/graphics/a_rank.png"),
+        "b_rank": pygame.image.load("/RayRhythm/graphics/b_rank.png"), 
+        "c_rank": pygame.image.load("/RayRhythm/graphics/c_rank.png"), 
+        "d_rank": pygame.image.load("/RayRhythm/graphics/d_rank.png"),
+
+        # ------------------------ LEVEL ASSETS ------------------------
+        "test_background": pygame.image.load("/RayRhythm/Charts/TestLevel/test-level-background.png"), 
+        "snowy_background": pygame.image.load("//RayRhythm/Charts/Snowy/SnowyBG.png"), 
+        "anemone_background": pygame.image.load("/RayRhythm/Charts/anamone/IdentityBG.png")
+    }
+
+def apply_scaling():
+    global images, global_scaler
+
+    images = {}
+    for key, img in original_images.items():
+        images[key] = pygame.transform.scale_by(img, global_scaler)
 
 def set_global_scaler(value: float):
     global global_scaler
     global_scaler = value
+    apply_scaling()
+
 
 # ------------------------ MAIN MENU ASSETS ------------------------
 main_menu_bg =  pygame.transform.scale_by(pygame.image.load("/RayRhythm/graphics/background2.jpg"), global_scaler)

@@ -9,43 +9,13 @@ pygame.mixer.init()
 clock = pygame.time.Clock()
 screen_scale = global_variables.global_scaler
 
-TestBackground = global_variables.test_background
-GameplayOverlay = global_variables.gameplay_overlay
-StartScreen = global_variables.start_screen
-
-# Circle skin assets
-PressedCircle = global_variables.pressed_circle
-RegularCirlce = global_variables.regular_circle
-PlayingCircle = global_variables.playing_circle
-FallingNote = global_variables.regular_circle
-
-# Rayman skin assets
-PressedRaymanCircle = global_variables.pressed_rayman_circle
-RegularRaymanCircle = global_variables.regular_rayman_circle
-FallingRaymanCircle = global_variables.regular_rayman_circle
-
-# Soprano skin assets
-PressedSopranoCircle = global_variables.pressed_soprano_circle
-RegularSopranoCircle = global_variables.regular_soprano_circle
-FallingSopranoCircle = global_variables.regular_soprano_circle
-
 # Result screen
-ResultScreen = global_variables.result_screen
 played_result_screen_sound = False
 
 # Sound effects
 ComboBreak = global_variables.combo_braek
 click_SFX = global_variables.click_sound
 click_SFX.set_volume(0.6)
-
-chart_lanes = [890*screen_scale, 1070*screen_scale, 1250*screen_scale, 1430*screen_scale]
-player_keys = [pygame.K_d, pygame.K_f, pygame.K_j, pygame.K_k]
-note_speed = 20*screen_scale
-target_y_coordinate = 880*screen_scale
-score = 0
-combo = 0
-max_combo = 0
-accuracy = 100.00 
 
 # I got no clue why the delay differs (migh fix later)
 if(screen_scale == 1):
@@ -65,8 +35,8 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
     while result_screen:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
 
-        screen.blit(TestBackground, (0, 0))
-        screen.blit(ResultScreen, (0, 0))
+        screen.blit(global_variables.images["test_background"], (0, 0))
+        screen.blit(global_variables.images["result_screen"], (0, 0))
 
         Final_Score_Text = global_variables.result_screen_font(int(45*screen_scale)).render(f"Total score: {final_score}", True, "White")
         Final_Score_Rect = Final_Score_Text.get_rect(center=(840*screen_scale, 430*screen_scale))
@@ -81,49 +51,49 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
         screen.blit(Final_acc, Final_acc_Rect)
 
         if(play_accuracy == 100.00):
-            ss_rank_image = global_variables.ss_rank
+            ss_rank_image = global_variables.images["ss_rank"]
             screen.blit(ss_rank_image, (1075*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.ss_sound_effect.play()
                 played_result_screen_sound = True
 
         elif(play_accuracy<100.00 and play_accuracy>=93.00):
-            s_rank_image = global_variables.s_rank
+            s_rank_image = global_variables.images["s_rank"]
             screen.blit(s_rank_image, (1085*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.s_sound_effect.play()
                 played_result_screen_sound = True
 
         elif(play_accuracy<93.00 and play_accuracy>=80.00):
-            a_rank_image = global_variables.a_rank
+            a_rank_image = global_variables.images["a_rank"]
             screen.blit(a_rank_image, (1085*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.a_sound_effect.play()
                 played_result_screen_sound = True
 
         elif(play_accuracy<80.00 and play_accuracy>=70.00):
-            b_rank_image = global_variables.b_rank
+            b_rank_image = global_variables.images["b_rank"]
             screen.blit(b_rank_image, (1085*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.b_sound_effect.play()
                 played_result_screen_sound = True
 
         elif(play_accuracy<70.00 and play_accuracy>=50.00):
-            c_rank_image = global_variables.c_rank
+            c_rank_image = global_variables.images["c_rank"]
             screen.blit(c_rank_image, (1085*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.c_sound_effect.play()
                 played_result_screen_sound = True
 
         elif(play_accuracy<50.00):
-            d_rank_image = global_variables.d_rank
+            d_rank_image = global_variables.images["d_rank"]
             screen.blit(d_rank_image, (1085*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.d_sound_effect.play()
                 played_result_screen_sound = True
 
 
-        EXIT_BUTTON = Button(image=global_variables.exit_button_results, pos=(840*screen_scale, 750*screen_scale), text_input="Exit level", font = global_variables.get_level_name_font(int(50*screen_scale)), base_color="White", hovering_color="#9FDAEE")
+        EXIT_BUTTON = Button(image=global_variables.images["exit_button_results"], pos=(840*screen_scale, 750*screen_scale), text_input="Exit level", font = global_variables.get_level_name_font(int(50*screen_scale)), base_color="White", hovering_color="#9FDAEE")
         EXIT_BUTTON.changeColor(PLAY_MOUSE_POS)
         EXIT_BUTTON.update(screen)  
 
@@ -144,22 +114,26 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
         
         pygame.display.update()
 
-def start_test_level(screen, skin_used, screen_scale):
-    global score
-    global combo
-    global accuracy
-    accuracy = 100
-    combo = 0
-    score = 0
-    max_combo = 0
+def start_test_level(screen, skin_used, screen_scale_passed):
+    global skin_variant, screen_scale
+    screen_scale = screen_scale_passed
     max_level_combo = 38
     circles_fallen = 0
-    global skin_variant
     skin_variant = skin_used
     running = False
     ShowStartScreen = True
     chart_index = 0
     notes = []
+
+    chart_lanes = [890*screen_scale, 1070*screen_scale, 1250*screen_scale, 1430*screen_scale]
+    player_keys = [pygame.K_d, pygame.K_f, pygame.K_j, pygame.K_k]
+    note_speed = 20*screen_scale
+    target_y_coordinate = 880*screen_scale
+    score = 0
+    combo = 0
+    max_combo = 0
+    accuracy = 100.00 
+
     if (skin_variant==0):
         HitSound = global_variables.hit_sound
     elif(skin_variant==1):
@@ -178,14 +152,12 @@ def start_test_level(screen, skin_used, screen_scale):
                     ShowStartScreen = False
                     running = True
                 if event.key == pygame.K_ESCAPE:
-                    pygame.mixer_music.load(global_variables.level_select_music)
-                    pygame.mixer_music.set_volume(0.3)
-                    pygame.mixer_music.play()
+                    pygame.mixer.music.play()
                     ShowStartScreen = False
 
-        screen.blit(TestBackground, (0, 0))
-        screen.blit(GameplayOverlay, (0, 0))
-        screen.blit(StartScreen, (0, 0))
+        screen.blit(global_variables.images["test_background"], (0, 0))
+        screen.blit(global_variables.images["gameplay_overlay"], (0, 0))
+        screen.blit(global_variables.images["start_screen"], (0, 0))
 
         pygame.display.flip()
         clock.tick(60)
@@ -284,53 +256,53 @@ def start_test_level(screen, skin_used, screen_scale):
 
         notes = [n for n in notes if n["y"] < 1050 and not n["hit"]]
 
-        screen.blit(TestBackground, (0, 0))
-        screen.blit(GameplayOverlay, (0, 0)) 
+        screen.blit(global_variables.images["test_background"], (0, 0))
+        screen.blit(global_variables.images["gameplay_overlay"], (0, 0)) 
 
         if skin_variant == 0:
-            screen.blit(PlayingCircle, (890*screen_scale, 880*screen_scale))
-            screen.blit(PlayingCircle, (1070*screen_scale, 880*screen_scale))
-            screen.blit(PlayingCircle, (1250*screen_scale, 880*screen_scale))
-            screen.blit(PlayingCircle, (1430*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["playing_circle"], (890*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["playing_circle"], (1070*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["playing_circle"], (1250*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["playing_circle"], (1430*screen_scale, 880*screen_scale))
             for x in chart_lanes:
-                screen.blit(PlayingCircle, (x, target_y_coordinate))
+                screen.blit(global_variables.images["playing_circle"], (x, target_y_coordinate))
             for n in notes:
                 x = chart_lanes[n["lane"]]
-                screen.blit(FallingNote, (x, n["y"]))
+                screen.blit(global_variables.images["regular_circle"], (x, n["y"]))
             keys = pygame.key.get_pressed()
             for lane, key in enumerate(player_keys):
                 if keys[key]:
-                    screen.blit(PressedCircle, (chart_lanes[lane], target_y_coordinate))
+                    screen.blit(global_variables.images["pressed_circle"], (chart_lanes[lane], target_y_coordinate))
 
         if skin_variant == 1:
-            screen.blit(RegularRaymanCircle, (890*screen_scale, 880*screen_scale))
-            screen.blit(RegularRaymanCircle, (1070*screen_scale, 880*screen_scale))
-            screen.blit(RegularRaymanCircle, (1250*screen_scale, 880*screen_scale))
-            screen.blit(RegularRaymanCircle, (1430*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["regular_rayman_circle"], (890*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["regular_rayman_circle"], (1070*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["regular_rayman_circle"], (1250*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["regular_rayman_circle"], (1430*screen_scale, 880*screen_scale))
             for x in chart_lanes:
-                screen.blit(RegularRaymanCircle, (x, target_y_coordinate))
+                screen.blit(global_variables.images["regular_rayman_circle"], (x, target_y_coordinate))
             for n in notes:
                 x = chart_lanes[n["lane"]]
-                screen.blit(FallingRaymanCircle, (x, n["y"]))
+                screen.blit(global_variables.images["regular_rayman_circle"], (x, n["y"]))
             keys = pygame.key.get_pressed()
             for lane, key in enumerate(player_keys):
                 if keys[key]:
-                    screen.blit(PressedRaymanCircle, (chart_lanes[lane], target_y_coordinate))
+                    screen.blit(global_variables.images["pressed_rayman_circle"], (chart_lanes[lane], target_y_coordinate))
 
         if skin_variant == 2:
-            screen.blit(RegularSopranoCircle, (890*screen_scale, 880*screen_scale))
-            screen.blit(RegularSopranoCircle, (1070*screen_scale, 880*screen_scale))
-            screen.blit(RegularSopranoCircle, (1250*screen_scale, 880*screen_scale))
-            screen.blit(RegularSopranoCircle, (1430*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["regular_soprano_circle"], (890*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["regular_soprano_circle"], (1070*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["regular_soprano_circle"], (1250*screen_scale, 880*screen_scale))
+            screen.blit(global_variables.images["regular_soprano_circle"], (1430*screen_scale, 880*screen_scale))
             for x in chart_lanes:
-                screen.blit(RegularSopranoCircle, (x, target_y_coordinate))
+                screen.blit(global_variables.images["regular_soprano_circle"], (x, target_y_coordinate))
             for n in notes:
                 x = chart_lanes[n["lane"]]
-                screen.blit(FallingSopranoCircle, (x, n["y"]))
+                screen.blit(global_variables.images["regular_soprano_circle"], (x, n["y"]))
             keys = pygame.key.get_pressed()
             for lane, key in enumerate(player_keys):
                 if keys[key]:
-                    screen.blit(PressedSopranoCircle, (chart_lanes[lane], target_y_coordinate))
+                    screen.blit(global_variables.images["pressed_soprano_circle"], (chart_lanes[lane], target_y_coordinate))
 
         font = pygame.font.Font(None, int(60*screen_scale))
         score_text = font.render(f"Score: {score}", True, (255, 255, 255))
