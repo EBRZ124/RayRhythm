@@ -48,42 +48,42 @@ def show_result_screen(screen, final_score, final_max_combo, play_accuracy):
         screen.blit(Final_acc, Final_acc_Rect)
 
         if(play_accuracy == 100.00):
-            ss_rank_image = global_variables.ss_rank
+            ss_rank_image = global_variables.images["ss_rank"]
             screen.blit(ss_rank_image, (1075*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.ss_sound_effect.play()
                 played_result_screen_sound = True
 
         elif(play_accuracy<100.00 and play_accuracy>=93.00):
-            s_rank_image = global_variables.s_rank
+            s_rank_image = global_variables.images["s_rank"]
             screen.blit(s_rank_image, (1085*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.s_sound_effect.play()
                 played_result_screen_sound = True
 
         elif(play_accuracy<93.00 and play_accuracy>=80.00):
-            a_rank_image = global_variables.a_rank
+            a_rank_image = global_variables.images["a_rank"]
             screen.blit(a_rank_image, (1085*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.a_sound_effect.play()
                 played_result_screen_sound = True
 
         elif(play_accuracy<80.00 and play_accuracy>=70.00):
-            b_rank_image = global_variables.b_rank
+            b_rank_image = global_variables.images["b_rank"]
             screen.blit(b_rank_image, (1085*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.b_sound_effect.play()
                 played_result_screen_sound = True
 
         elif(play_accuracy<70.00 and play_accuracy>=50.00):
-            c_rank_image = global_variables.c_rank
+            c_rank_image = global_variables.images["c_rank"]
             screen.blit(c_rank_image, (1085*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.c_sound_effect.play()
                 played_result_screen_sound = True
 
         elif(play_accuracy<50.00):
-            d_rank_image = global_variables.d_rank
+            d_rank_image = global_variables.images["d_rank"]
             screen.blit(d_rank_image, (1085*screen_scale, 442*screen_scale))
             if not played_result_screen_sound:
                 global_variables.d_sound_effect.play()
