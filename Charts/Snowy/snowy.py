@@ -184,7 +184,6 @@ def start_snowy(screen, skin_used, screen_scale_passed):
 
         music_time = (pygame.mixer.music.get_pos() if music_started else 0) - music_offset_ms
 
-        # Music offset logic
         while chart_index < len(chart) and chart[chart_index]["time"] - spawn_lead_ms <= now:
             n = chart[chart_index]
             notes.append({"lane": n["lane"], "y": -50, "hit": False, "time": n["time"]})

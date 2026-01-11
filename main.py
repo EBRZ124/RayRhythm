@@ -3,12 +3,10 @@ from Charts.anamone import anamone
 from Charts.TestLevel import TestLevel
 from Charts.Snowy import snowy
 from button import Button
-from pygame_widgets.textbox import TextBox
-from pygame_widgets.slider import Slider
 import global_variables
 
 pygame.init()
-resolutions_16_10 = [
+resolutions_16_10 = [ # 16:10
     (840, 525), # scale = 0.5
     (1176, 735), # scale = 0.7
     (1680, 1050), # scale = 1
@@ -20,12 +18,8 @@ pygame.display.set_caption("RayRhythm")
 global_variables.load_assets()
 global_variables.apply_scaling()
 
-BackGround1 = global_variables.main_menu_bg
-LevelSelectBG = global_variables.level_select_bg
-OptionsMenuBG = global_variables.options_menu_bg
-
-music_volume = 0.5
-sound_effect_volume = 0.5
+music_volume = global_variables.music_volume
+sound_effect_volume = global_variables.sound_effect_volume
 
 pygame.mixer_music.set_volume(music_volume)
 click_SFX = global_variables.click_sound
@@ -48,7 +42,6 @@ def main_menu():
         TEXT_BG = global_variables.images["title_text_box"]
         TEXT_BG = pygame.transform.scale(TEXT_BG, ((MENU_RECT.width + 200*screen_scaler), (MENU_RECT.height + 100*screen_scaler)))
         BG_RECT = TEXT_BG.get_rect(center=MENU_RECT.center)
-        BG_RECT.y -= 10
 
         PLAY_BUTTON = Button(image=global_variables.images["play_button_box"], pos=(840*screen_scaler, 400*screen_scaler),
                              text_input="PLAY", font=global_variables.get_main_menu_font(int(75*screen_scaler)), base_color="#E57B1E", hovering_color="White")
@@ -206,7 +199,7 @@ def options():
         OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(840*screen_scaler, 100*screen_scaler))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-        SKINS_TEXT = global_variables.get_main_menu_font(int(60*screen_scaler)).render("Screen Scales/Resolutions", True, "White")
+        SKINS_TEXT = global_variables.get_main_menu_font(int(60*screen_scaler)).render("Resolutions", True, "White")
         SKINS_RECT = SKINS_TEXT.get_rect(center=(840*screen_scaler, 200*screen_scaler))
         screen.blit(SKINS_TEXT, SKINS_RECT)
 
@@ -225,6 +218,11 @@ def options():
         SKINS_TEXT = global_variables.get_main_menu_font(int(60*screen_scaler)).render("SKINS", True, "White")
         SKINS_RECT = SKINS_TEXT.get_rect(center=(840*screen_scaler, 640*screen_scaler))
         screen.blit(SKINS_TEXT, SKINS_RECT)
+
+
+        OPTIONS_TEXT = global_variables.get_main_menu_font(int(75*screen_scaler)).render("Settings Menu", True, "White")
+        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(840*screen_scaler, 100*screen_scaler))
+        screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
         if selected_skin == 0:
             SKIN_CIRCLE = Button(image=global_variables.images["circle_skin_selected"], pos=(840*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
