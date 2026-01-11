@@ -10,40 +10,10 @@ Made with PyGame library: https://www.pygame.org/
 
 <img width="1674" height="1043" alt="image" src="https://github.com/user-attachments/assets/88955956-5eca-4ef3-9fc0-b3b69c5e894e" />
 
-### Gameplay
+### Gameplay (3 different skins and maps)
 
-![RayRhythm_Gameplay](https://github.com/user-attachments/assets/61629bbb-e72f-4d6d-9a46-996072d747c4)
+![ezgif-1632ec2698a5bbee](https://github.com/user-attachments/assets/b5c4501c-efd1-4855-ae29-3977b9222f14)
 
 ### Result screen
 
-<img width="3354" height="2054" alt="image" src="https://github.com/user-attachments/assets/67fbfc0c-996f-428f-ab61-8195e0117811" />
-
-
-## Files
-
-    .
-    ├── main.py - The main file to run the program if not from an .exe
-    ├── button.py - Button class that handles how buttons function for menus
-    ├── Graphics - folder with the games assets minus level backgrounds
-    ├── fonts - folder with the fonts used in the game
-    ├── sounds - folder with the main menu songs and sound effect
-    ├── Charts - fodler with the levels
-    │   ├── anamone - folder that includes a python file that has the function to play the level plus the levels background and song
-    │   ├── TestLevel - folder with a test level, its background and song
-    ├── Graphics - folder with visual elements for the GUI
-    ├── requirements.txt - required libraries
-    ├── credits - media credits, both visual and audial
-
-## WIP
-
-- Settings menu - change music and sound effect volume and change the skin (currently there are two, but they're hard coded)
-
-- ~Display max combo at the end of the chart~ (Done 17.11.2025.)
-
-- 3 total charts
-
-- Improved text readability
-
-- Improved performance
-
-
+<img width="1173" height="729" alt="Screenshot 2026-01-11 at 14 50 52" src="https://github.com/user-attachments/assets/4d9fac53-8701-4aff-a4d8-8f0bb6a3688b" />
