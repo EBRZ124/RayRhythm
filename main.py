@@ -199,8 +199,8 @@ def options():
         OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(840*screen_scaler, 100*screen_scaler))
         screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
 
-        SKINS_TEXT = global_variables.get_main_menu_font(int(60*screen_scaler)).render("Resolutions", True, "White")
-        SKINS_RECT = SKINS_TEXT.get_rect(center=(840*screen_scaler, 200*screen_scaler))
+        SKINS_TEXT = global_variables.get_level_name_font(int(60*screen_scaler)).render("Resolutions", True, "White")
+        SKINS_RECT = SKINS_TEXT.get_rect(center=(840*screen_scaler, 180*screen_scaler))
         screen.blit(SKINS_TEXT, SKINS_RECT)
 
         resolution_05 = Button(image=global_variables.images["screen_scale_05"], pos=(530*screen_scaler, 320*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
@@ -215,51 +215,46 @@ def options():
         resolution_10.changeColor(OPTIONS_MOUSE_POS)
         resolution_10.update(screen)
 
-        SKINS_TEXT = global_variables.get_main_menu_font(int(60*screen_scaler)).render("SKINS", True, "White")
-        SKINS_RECT = SKINS_TEXT.get_rect(center=(840*screen_scaler, 640*screen_scaler))
+        SKINS_TEXT = global_variables.get_level_name_font(int(60*screen_scaler)).render("Skins", True, "White")
+        SKINS_RECT = SKINS_TEXT.get_rect(center=(840*screen_scaler, 460*screen_scaler))
         screen.blit(SKINS_TEXT, SKINS_RECT)
 
-
-        OPTIONS_TEXT = global_variables.get_main_menu_font(int(75*screen_scaler)).render("Settings Menu", True, "White")
-        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(840*screen_scaler, 100*screen_scaler))
-        screen.blit(OPTIONS_TEXT, OPTIONS_RECT)
-
         if selected_skin == 0:
-            SKIN_CIRCLE = Button(image=global_variables.images["circle_skin_selected"], pos=(840*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_CIRCLE = Button(image=global_variables.images["circle_skin_selected"], pos=(840*screen_scaler, 595*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_CIRCLE.changeColor(OPTIONS_MOUSE_POS)
             SKIN_CIRCLE.update(screen)
 
-            SKIN_RAYMAN = Button(image=global_variables.images["rayman_skin_unselected"], pos=(1150*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_RAYMAN = Button(image=global_variables.images["rayman_skin_unselected"], pos=(1150*screen_scaler, 595*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_RAYMAN.changeColor(OPTIONS_MOUSE_POS)
             SKIN_RAYMAN.update(screen)
 
-            SKIN_SOPRANO = Button(image=global_variables.images["sopranos_skin_unselected"], pos=(530*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_SOPRANO = Button(image=global_variables.images["sopranos_skin_unselected"], pos=(530*screen_scaler, 595*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_SOPRANO.changeColor(OPTIONS_MOUSE_POS)
             SKIN_SOPRANO.update(screen)
 
         if selected_skin == 1:
-            SKIN_CIRCLE = Button(image=global_variables.images["circle_skin_unselected"], pos=(840*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_CIRCLE = Button(image=global_variables.images["circle_skin_unselected"], pos=(840*screen_scaler, 595*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_CIRCLE.changeColor(OPTIONS_MOUSE_POS)
             SKIN_CIRCLE.update(screen)
 
-            SKIN_RAYMAN = Button(image=global_variables.images["rayman_skin_selected"], pos=(1150*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_RAYMAN = Button(image=global_variables.images["rayman_skin_selected"], pos=(1150*screen_scaler, 595*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_RAYMAN.changeColor(OPTIONS_MOUSE_POS)
             SKIN_RAYMAN.update(screen)
 
-            SKIN_SOPRANO = Button(image=global_variables.images["sopranos_skin_unselected"], pos=(530*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_SOPRANO = Button(image=global_variables.images["sopranos_skin_unselected"], pos=(530*screen_scaler, 595*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_SOPRANO.changeColor(OPTIONS_MOUSE_POS)
             SKIN_SOPRANO.update(screen)
 
         if selected_skin == 2:
-            SKIN_CIRCLE = Button(image=global_variables.images["circle_skin_unselected"], pos=(840*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_CIRCLE = Button(image=global_variables.images["circle_skin_unselected"], pos=(840*screen_scaler, 595*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_CIRCLE.changeColor(OPTIONS_MOUSE_POS)
             SKIN_CIRCLE.update(screen)
 
-            SKIN_RAYMAN = Button(image=global_variables.images["rayman_skin_unselected"], pos=(1150*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_RAYMAN = Button(image=global_variables.images["rayman_skin_unselected"], pos=(1150*screen_scaler, 595*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_RAYMAN.changeColor(OPTIONS_MOUSE_POS)
             SKIN_RAYMAN.update(screen)
 
-            SKIN_SOPRANO = Button(image=global_variables.images["sopranos_skin_selected"], pos=(530*screen_scaler, 775*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
+            SKIN_SOPRANO = Button(image=global_variables.images["sopranos_skin_selected"], pos=(530*screen_scaler, 595*screen_scaler), text_input=" ", font=global_variables.get_level_name_font(75), base_color="White", hovering_color="White")
             SKIN_SOPRANO.changeColor(OPTIONS_MOUSE_POS)
             SKIN_SOPRANO.update(screen)
 
