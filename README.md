@@ -17,3 +17,13 @@ Made with PyGame library: https://www.pygame.org/
 ### Result screen
 
 <img width="1173" height="729" alt="Screenshot 2026-01-11 at 14 50 52" src="https://github.com/user-attachments/assets/4d9fac53-8701-4aff-a4d8-8f0bb6a3688b" />
+
+## Planned additions/WIP stuff
+
+- Best scores are saved and displayed under each level
+
+- Levels are shown individually and can be navigated in the select screen with arrows
+
+- The user can change keybinds for playing the game and the start screen corresponds to it
+
+- Tutorial course (played only once)
