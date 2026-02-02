@@ -66,7 +66,7 @@ def main_menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
                     click_SFX.play()
-                    play()
+                    play_test_level()
                 if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     click_SFX.play()
                     options()
@@ -75,41 +75,94 @@ def main_menu():
                     sys.exit()
         
         pygame.display.update()
-    
-def play():
+
+def play_test_level():
     pygame.mixer_music.stop()
     music_volume = 0.3
     pygame.mixer_music.set_volume(music_volume)
-    pygame.mixer.music.load(global_variables.level_select_music)
-    pygame.mixer_music.play()
-
+    pygame.mixer.music.load(global_variables.test_level_song)
+    pygame.mixer_music.play() 
     while True:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         LEVEL_MOUSE_POS = pygame.mouse.get_pos()
 
-        screen.blit(global_variables.images["level_select_bg"], (0, 0))
-        
-        select_stage_skin = global_variables.get_main_menu_font(int(75*screen_scaler)).render("Select a stage", True, "White")
-        stage_rect = select_stage_skin.get_rect(center=(840*screen_scaler, 90*screen_scaler))
+        screen.blit(global_variables.images["test_background"], (0, 0))  
+        screen.blit(global_variables.images["level_select_transparent"], (0, 0))  
+
+        select_stage_skin = global_variables.get_main_menu_font(int(100*screen_scaler)).render("Select a stage", True, "White")
+        stage_rect = select_stage_skin.get_rect(center=(840*screen_scaler, 210*screen_scaler))
         screen.blit(select_stage_skin, stage_rect)
 
-        LEVEL_SNOWY = Button(image=global_variables.images["snowy_box"], pos=(840*screen_scaler, 270*screen_scaler),
-                            text_input="Snowy", font=global_variables.get_level_name_font(int(60*screen_scaler)), base_color="White", hovering_color="#D3DDF8")
-        LEVEL_SNOWY.changeColor(LEVEL_MOUSE_POS)
-        LEVEL_SNOWY.update(screen)
-
-        TEST_LEVEL = Button(image=global_variables.images["test_level_box"], pos=(840*screen_scaler, 770*screen_scaler),
-                            text_input="TEST LEVEL", font=global_variables.get_level_name_font(int(60*screen_scaler)), base_color="White", hovering_color="#FFFBDA")
+        TEST_LEVEL = Button(image=global_variables.images["test_level_box"], pos=(840*screen_scaler, 540*screen_scaler),
+                                text_input="TEST LEVEL", font=global_variables.get_level_name_font(int(120*screen_scaler)), base_color="White", hovering_color="#FFFBDA")
         TEST_LEVEL.changeColor(LEVEL_MOUSE_POS)
         TEST_LEVEL.update(screen)
 
-        LEVEL_ANEMONE = Button(image=global_variables.images["anemone_box"], pos=(840*screen_scaler, 520*screen_scaler),
-                              text_input="ANEMONE", font=global_variables.get_level_name_font(int(60*screen_scaler)), base_color="White", hovering_color="#C2F1FF")
+        right_arrow = Button(image=global_variables.images["arrow_right"], pos=(1500*screen_scaler, 540*screen_scaler), text_input="", font=global_variables.get_level_name_font(int(60*screen_scaler)), base_color="White", hovering_color="White")
+        right_arrow.changeColor(LEVEL_MOUSE_POS)
+        right_arrow.update(screen)
+
+        left_arrow = Button(image=global_variables.images["arrow_left"], pos=(150*screen_scaler, 540*screen_scaler), text_input="", font=global_variables.get_level_name_font(int(60*screen_scaler)), base_color="White", hovering_color="White")
+        left_arrow.changeColor(LEVEL_MOUSE_POS)
+        left_arrow.update(screen)
+
+        PLAY_BACK = Button(image=None, pos=(840*screen_scaler, 950*screen_scaler), text_input="BACK", font=global_variables.get_main_menu_font(int(75*screen_scaler)), base_color="White", hovering_color="#F4CCFC")
+        PLAY_BACK.changeColor(PLAY_MOUSE_POS)
+        PLAY_BACK.update(screen)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
+                    click_SFX.play()
+                    main_menu()
+                if TEST_LEVEL.checkForInput(PLAY_MOUSE_POS):
+                    TestLevel.start_test_level(screen, selected_skin, screen_scaler)
+                if left_arrow.checkForInput(PLAY_MOUSE_POS):
+                    click_SFX.play()
+                    play_snowy_level()
+                if right_arrow.checkForInput(PLAY_MOUSE_POS):
+                    click_SFX.play()
+                    play_anemone_level()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    main_menu()
+
+        pygame.display.update()
+
+def play_anemone_level():
+    pygame.mixer_music.stop()
+    music_volume = 0.3
+    pygame.mixer_music.set_volume(music_volume)
+    pygame.mixer.music.load(global_variables.anemone_song)
+    pygame.mixer_music.play() 
+    while True:
+        PLAY_MOUSE_POS = pygame.mouse.get_pos()
+        LEVEL_MOUSE_POS = pygame.mouse.get_pos()
+
+        screen.blit(global_variables.images["anemone_background"], (0, 0))  
+        screen.blit(global_variables.images["level_select_transparent"], (0, 0))  
+
+        select_stage_skin = global_variables.get_main_menu_font(int(100*screen_scaler)).render("Select a stage", True, "White")
+        stage_rect = select_stage_skin.get_rect(center=(840*screen_scaler, 210*screen_scaler))
+        screen.blit(select_stage_skin, stage_rect)
+
+        LEVEL_ANEMONE = Button(image=global_variables.images["anemone_box"], pos=(840*screen_scaler, 540*screen_scaler),
+                                text_input="ANEMONE", font=global_variables.get_level_name_font(int(120*screen_scaler)), base_color="White", hovering_color="#C2F1FF")
         LEVEL_ANEMONE.changeColor(LEVEL_MOUSE_POS)
         LEVEL_ANEMONE.update(screen)
 
-        PLAY_BACK = Button(image=None, pos=(840*screen_scaler, 950*screen_scaler), text_input="BACK", font=global_variables.get_main_menu_font(int(75*screen_scaler)), base_color="White", hovering_color="#F4CCFC")
+        right_arrow = Button(image=global_variables.images["arrow_right"], pos=(1500*screen_scaler, 540*screen_scaler), text_input="", font=global_variables.get_level_name_font(int(60*screen_scaler)), base_color="White", hovering_color="White")
+        right_arrow.changeColor(LEVEL_MOUSE_POS)
+        right_arrow.update(screen)
 
+        left_arrow = Button(image=global_variables.images["arrow_left"], pos=(150*screen_scaler, 540*screen_scaler), text_input="", font=global_variables.get_level_name_font(int(60*screen_scaler)), base_color="White", hovering_color="White")
+        left_arrow.changeColor(LEVEL_MOUSE_POS)
+        left_arrow.update(screen)
+
+        PLAY_BACK = Button(image=None, pos=(840*screen_scaler, 950*screen_scaler), text_input="BACK", font=global_variables.get_main_menu_font(int(75*screen_scaler)), base_color="White", hovering_color="#F4CCFC")
         PLAY_BACK.changeColor(PLAY_MOUSE_POS)
         PLAY_BACK.update(screen)
 
@@ -123,14 +176,72 @@ def play():
                     main_menu()
                 if LEVEL_ANEMONE.checkForInput(PLAY_MOUSE_POS):
                     anamone.start_anamone(screen, selected_skin, screen_scaler)
-                if TEST_LEVEL.checkForInput(PLAY_MOUSE_POS):
-                    TestLevel.start_test_level(screen, selected_skin, screen_scaler)
-                if LEVEL_SNOWY.checkForInput(PLAY_MOUSE_POS):
-                    snowy.start_snowy(screen, selected_skin, screen_scaler)
+                if left_arrow.checkForInput(PLAY_MOUSE_POS):
+                    click_SFX.play()
+                    play_test_level()
+                if right_arrow.checkForInput(PLAY_MOUSE_POS):
+                    click_SFX.play()
+                    play_snowy_level()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     main_menu()
-  
+
+        pygame.display.update()
+
+def play_snowy_level():
+    pygame.mixer_music.stop()
+    music_volume = 0.3
+    pygame.mixer_music.set_volume(music_volume)
+    pygame.mixer.music.load(global_variables.anemone_song)
+    pygame.mixer_music.play() 
+    while True:
+        PLAY_MOUSE_POS = pygame.mouse.get_pos()
+        LEVEL_MOUSE_POS = pygame.mouse.get_pos()
+
+        screen.blit(global_variables.images["snowy_background"], (0, 0))  
+        screen.blit(global_variables.images["level_select_transparent"], (0, 0))  
+
+        select_stage_skin = global_variables.get_main_menu_font(int(100*screen_scaler)).render("Select a stage", True, "White")
+        stage_rect = select_stage_skin.get_rect(center=(840*screen_scaler, 210*screen_scaler))
+        screen.blit(select_stage_skin, stage_rect)
+
+        LEVEL_SNOWY = Button(image=global_variables.images["snowy_box"], pos=(840*screen_scaler, 540*screen_scaler),
+                                text_input="Snowy", font=global_variables.get_level_name_font(int(120*screen_scaler)), base_color="White", hovering_color="#D3DDF8")
+        LEVEL_SNOWY.changeColor(LEVEL_MOUSE_POS)
+        LEVEL_SNOWY.update(screen)
+
+        right_arrow = Button(image=global_variables.images["arrow_right"], pos=(1500*screen_scaler, 540*screen_scaler), text_input="", font=global_variables.get_level_name_font(int(60*screen_scaler)), base_color="White", hovering_color="White")
+        right_arrow.changeColor(LEVEL_MOUSE_POS)
+        right_arrow.update(screen)
+
+        left_arrow = Button(image=global_variables.images["arrow_left"], pos=(150*screen_scaler, 540*screen_scaler), text_input="", font=global_variables.get_level_name_font(int(60*screen_scaler)), base_color="White", hovering_color="White")
+        left_arrow.changeColor(LEVEL_MOUSE_POS)
+        left_arrow.update(screen)
+
+        PLAY_BACK = Button(image=None, pos=(840*screen_scaler, 950*screen_scaler), text_input="BACK", font=global_variables.get_main_menu_font(int(75*screen_scaler)), base_color="White", hovering_color="#F4CCFC")
+        PLAY_BACK.changeColor(PLAY_MOUSE_POS)
+        PLAY_BACK.update(screen)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
+                    click_SFX.play()
+                    main_menu()
+                if LEVEL_SNOWY.checkForInput(PLAY_MOUSE_POS):
+                    snowy.start_snowy(screen, selected_skin, screen_scaler)
+                if left_arrow.checkForInput(PLAY_MOUSE_POS):
+                    click_SFX.play()
+                    play_anemone_level()
+                if right_arrow.checkForInput(PLAY_MOUSE_POS):
+                    click_SFX.play()
+                    play_test_level()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    main_menu()
+
         pygame.display.update()
 
 def options():
@@ -263,6 +374,5 @@ def options():
         OPTIONS_BACK.update(screen)
 
         pygame.display.update()
-
 
 main_menu()
