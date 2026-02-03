@@ -4,6 +4,8 @@ RayRhythm is a rayman themed vertical scolling rhythm games (VSRG). Inspired by 
 
 Made with PyGame library: https://www.pygame.org/
 
+Detailed description (LV langauge): https://docs.google.com/document/d/1nj7npV8bUs5bEYSdsmjbIuehEKahl37NLMtUvJkuOqE/edit?usp=sharing
+
 ## In game screenshots
 
 #### Main Menu
