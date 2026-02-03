@@ -66,6 +66,10 @@ def main_menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
                     click_SFX.play()
+                    pygame.mixer_music.stop()
+                    pygame.mixer_music.set_volume(0.3)
+                    pygame.mixer.music.load(global_variables.level_select_music)
+                    pygame.mixer_music.play() 
                     play_test_level()
                 if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     click_SFX.play()
@@ -77,11 +81,6 @@ def main_menu():
         pygame.display.update()
 
 def play_test_level():
-    pygame.mixer_music.stop()
-    music_volume = 0.3
-    pygame.mixer_music.set_volume(music_volume)
-    pygame.mixer.music.load(global_variables.test_level_song)
-    pygame.mixer_music.play() 
     while True:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         LEVEL_MOUSE_POS = pygame.mouse.get_pos()
@@ -89,7 +88,7 @@ def play_test_level():
         screen.blit(global_variables.images["test_background"], (0, 0))  
         screen.blit(global_variables.images["level_select_transparent"], (0, 0))  
 
-        select_stage_skin = global_variables.get_main_menu_font(int(100*screen_scaler)).render("Select a stage", True, "White")
+        select_stage_skin = global_variables.result_screen_font(int(100*screen_scaler)).render("SELECT A STAGE", True, "White")
         stage_rect = select_stage_skin.get_rect(center=(840*screen_scaler, 210*screen_scaler))
         screen.blit(select_stage_skin, stage_rect)
 
@@ -106,7 +105,11 @@ def play_test_level():
         left_arrow.changeColor(LEVEL_MOUSE_POS)
         left_arrow.update(screen)
 
-        PLAY_BACK = Button(image=None, pos=(840*screen_scaler, 950*screen_scaler), text_input="BACK", font=global_variables.get_main_menu_font(int(75*screen_scaler)), base_color="White", hovering_color="#F4CCFC")
+        difficulty_stars = global_variables.get_level_name_font(int(50*screen_scaler)).render("Difficulty: 3*", True, "White")
+        difficulty_rect = difficulty_stars.get_rect(center=(840*screen_scaler, 750*screen_scaler))
+        screen.blit(difficulty_stars, difficulty_rect)
+
+        PLAY_BACK = Button(image=None, pos=(840*screen_scaler, 950*screen_scaler), text_input="BACK", font=global_variables.result_screen_font(int(75*screen_scaler)), base_color="White", hovering_color="#F4CCFC")
         PLAY_BACK.changeColor(PLAY_MOUSE_POS)
         PLAY_BACK.update(screen)
 
@@ -133,11 +136,6 @@ def play_test_level():
         pygame.display.update()
 
 def play_anemone_level():
-    pygame.mixer_music.stop()
-    music_volume = 0.3
-    pygame.mixer_music.set_volume(music_volume)
-    pygame.mixer.music.load(global_variables.anemone_song)
-    pygame.mixer_music.play() 
     while True:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         LEVEL_MOUSE_POS = pygame.mouse.get_pos()
@@ -145,7 +143,7 @@ def play_anemone_level():
         screen.blit(global_variables.images["anemone_background"], (0, 0))  
         screen.blit(global_variables.images["level_select_transparent"], (0, 0))  
 
-        select_stage_skin = global_variables.get_main_menu_font(int(100*screen_scaler)).render("Select a stage", True, "White")
+        select_stage_skin = global_variables.result_screen_font(int(100*screen_scaler)).render("SELECT A STAGE", True, "White")
         stage_rect = select_stage_skin.get_rect(center=(840*screen_scaler, 210*screen_scaler))
         screen.blit(select_stage_skin, stage_rect)
 
@@ -162,7 +160,11 @@ def play_anemone_level():
         left_arrow.changeColor(LEVEL_MOUSE_POS)
         left_arrow.update(screen)
 
-        PLAY_BACK = Button(image=None, pos=(840*screen_scaler, 950*screen_scaler), text_input="BACK", font=global_variables.get_main_menu_font(int(75*screen_scaler)), base_color="White", hovering_color="#F4CCFC")
+        difficulty_stars = global_variables.get_level_name_font(int(50*screen_scaler)).render("Difficulty: 6*", True, "White")
+        difficulty_rect = difficulty_stars.get_rect(center=(840*screen_scaler, 750*screen_scaler))
+        screen.blit(difficulty_stars, difficulty_rect)
+
+        PLAY_BACK = Button(image=None, pos=(840*screen_scaler, 950*screen_scaler), text_input="BACK", font=global_variables.result_screen_font(int(75*screen_scaler)), base_color="White", hovering_color="#F4CCFC")
         PLAY_BACK.changeColor(PLAY_MOUSE_POS)
         PLAY_BACK.update(screen)
 
@@ -189,11 +191,6 @@ def play_anemone_level():
         pygame.display.update()
 
 def play_snowy_level():
-    pygame.mixer_music.stop()
-    music_volume = 0.3
-    pygame.mixer_music.set_volume(music_volume)
-    pygame.mixer.music.load(global_variables.anemone_song)
-    pygame.mixer_music.play() 
     while True:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         LEVEL_MOUSE_POS = pygame.mouse.get_pos()
@@ -201,7 +198,7 @@ def play_snowy_level():
         screen.blit(global_variables.images["snowy_background"], (0, 0))  
         screen.blit(global_variables.images["level_select_transparent"], (0, 0))  
 
-        select_stage_skin = global_variables.get_main_menu_font(int(100*screen_scaler)).render("Select a stage", True, "White")
+        select_stage_skin = global_variables.result_screen_font(int(100*screen_scaler)).render("SELECT A STAGE", True, "White")
         stage_rect = select_stage_skin.get_rect(center=(840*screen_scaler, 210*screen_scaler))
         screen.blit(select_stage_skin, stage_rect)
 
@@ -218,7 +215,11 @@ def play_snowy_level():
         left_arrow.changeColor(LEVEL_MOUSE_POS)
         left_arrow.update(screen)
 
-        PLAY_BACK = Button(image=None, pos=(840*screen_scaler, 950*screen_scaler), text_input="BACK", font=global_variables.get_main_menu_font(int(75*screen_scaler)), base_color="White", hovering_color="#F4CCFC")
+        difficulty_stars = global_variables.get_level_name_font(int(50*screen_scaler)).render("Difficulty: 2.5*", True, "White")
+        difficulty_rect = difficulty_stars.get_rect(center=(840*screen_scaler, 750*screen_scaler))
+        screen.blit(difficulty_stars, difficulty_rect)
+
+        PLAY_BACK = Button(image=None, pos=(840*screen_scaler, 950*screen_scaler), text_input="BACK", font=global_variables.result_screen_font(int(75*screen_scaler)), base_color="White", hovering_color="#F4CCFC")
         PLAY_BACK.changeColor(PLAY_MOUSE_POS)
         PLAY_BACK.update(screen)
 
